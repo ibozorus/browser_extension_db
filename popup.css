@@ -2,24 +2,30 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 20px;
+    min-width: 500px;
+    min-height: 550px;
 }
+
 .container {
     max-width: 500px;
     max-height: 550px;
     margin: 0 auto;
 }
-#station-tauschen{
+
+#station-tauschen {
     border-radius: 100px;
     color: rgb(100, 105, 115);
-    background-color: rgba(0,0,0,0);
-    border-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
     z-index: 1;
 }
-#suchen-button{
+
+#suchen-button {
     color: rgb(255, 255, 255);
     background-color: rgb(236, 0, 22);
     margin-top: 5%;
 }
-#header{
+
+#header {
     text-align: center;
 }

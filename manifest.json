@@ -3,7 +3,7 @@
   "name": "DB Navigator",
   "version": "1.0",
   "description": "Simple DB Navigator Chrome Extension",
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html"
   },
   "permissions": [
