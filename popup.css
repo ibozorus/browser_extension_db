@@ -6,12 +6,20 @@ body {
     min-height: 550px;
 }
 
+.text-input {
+    background-color: #f0f3f5;
+    border: none
+}
+
+
 .container {
     max-width: 500px;
     max-height: 550px;
     margin: 0 auto;
 }
-
+.input-group-append {
+    cursor: pointer;
+}
 #station-tauschen {
     border-radius: 100px;
     color: rgb(100, 105, 115);

@@ -6,6 +6,7 @@
     <title>DB Navigator</title>
     <link rel="stylesheet" href="popup.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.min.css">
 </head>
 <body>
 <div class="container">
@@ -28,10 +29,35 @@
             <div class="row">
                 <button id="suchen-button" class="btn">Suchen</button>
             </div>
+            <div class="row mt-2">
+                <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                    <i class="fa-solid fa-calendar-days"></i>Hinfahrt ändern
+                </button>
+            </div>
+            <div class="row mt-2">
+                <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                    <i class="fa-solid fa-calendar-days"></i>Rückfahrt ändern
+                </button>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    Anger
+                </div>
+                <button type="button" class="btn btn-primary col-6" data-mdb-toggle="modal"
+                        data-mdb-target="#exampleModal">
+                    <i class="fa-solid fa-calendar-days"></i>Zwischenhalte hinzufügen/entfernen
+                </button>
+            </div>
+            <div class="row mt-2">
+                <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                    <i class="fa-solid fa-calendar-days"></i>Verkehrsmittel
+                </button>
+            </div>
         </div>
     </form>
 </div>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
 <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
