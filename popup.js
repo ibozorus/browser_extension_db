@@ -48,6 +48,12 @@ $(function () {
             })
             .catch(error => console.log('error', error));
     });
+    $("#station-tauschen").on("click", function (e) {
+        let temp = $("#von-input").val();
+        $("#von-input").val($("#nach-input").val());
+        $("#nach-input").val(temp);
+        e.preventDefault();
+    });
 
 
 });
