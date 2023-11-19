@@ -15,43 +15,39 @@ $(function () {
         redirect: 'follow'
     };
 
-    function fetchStations(station) {
-        fetch(`https://apis.deutschebahn.com/db-api-marketplace/apis/ris-stations/v1/stop-places/by-name/${station}?limit=20`, requestOptions)
-            .then(response => {
-                response.json().then(result => {
-                    let stopPlaces = result.stopPlaces;
-                    for (let i = 0; i < stopPlaces.length; i++) {
-                        // console.log(stopPlaces[i]);
-                        // console.log(stopPlaces[i].names.DE.nameLong);
-                        $('#von-liste').append(`<li> 
-                                       <i class="fa-solid fa-hotel" style="color: #afb4bb;"></i>${stopPlaces[i].names.DE.nameLong} 
-                                  </li>`)
-                    }
-                })
-            })
-            .catch(error => console.log('error', error));
+    const setStopValue = (id, value) => {
+        $(id).val(value);
+        $('.modal').modal('hide');
     }
 
-    $('#von-input-modal').on("input", function fetchStations() {
+
+    $('.text-input-modal').on("input", function fetchStations() {
         $('#von-liste').empty();
+        $('#nach-liste').empty();
         let station = $(this).val();
         if (station == null || station === "") {
             return;
         }
+        let listId = $(this).attr("id").split("-")[0] + "-liste";
+        let inputId = $(this).attr("id").split("-")[0] + "-input";
         fetch(`https://apis.deutschebahn.com/db-api-marketplace/apis/ris-stations/v1/stop-places/by-name/${station}?limit=20`, requestOptions)
             .then(response => {
                 response.json().then(result => {
                     let stopPlaces = result.stopPlaces;
                     for (let i = 0; i < stopPlaces.length; i++) {
-                        $('#von-liste').append(`
-                                    <li class="list-group-item"> 
+                        $('#' + listId).append(`
+                                    <li class="list-group-item stop-list-item" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].names.DE.nameLong}" > 
                                        <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].names.DE.nameLong} 
-                                  </li>`)
+                                  </li>`);
+
+                        $(".stop-list-item").on("click", function () {
+                            setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'))
+                        })
                     }
                 })
             })
             .catch(error => console.log('error', error));
-    })
+    });
 
 
 });
