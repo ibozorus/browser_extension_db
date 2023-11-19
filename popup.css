@@ -8,7 +8,8 @@ body {
 
 .text-input {
     background-color: #f0f3f5;
-    border: none
+    border: none;
+    margin-top: 2% !important;
 }
 
 
@@ -17,15 +18,22 @@ body {
     max-height: 550px;
     margin: 0 auto;
 }
+
 .input-group-append {
     cursor: pointer;
 }
+
 #station-tauschen {
-    border-radius: 100px;
+    border-radius: 50%;
     color: rgb(100, 105, 115);
-    background-color: rgba(0, 0, 0, 0);
+    background-color: white;
     border-color: rgba(0, 0, 0, 0);
+    width: 8%;
+    height: 8%;
+    position: absolute;
     z-index: 1;
+    margin-left: 74%;
+    margin-top: 3.1%;
 }
 
 #suchen-button {

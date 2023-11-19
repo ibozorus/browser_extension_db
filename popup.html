@@ -13,18 +13,19 @@
     <h1 id="header">DB Sniffer</h1>
     <form>
         <div class="container">
-            <div class="row">.
-                <label for="von-input"></label><input placeholder="Von" type="text" id="von-input" name="von-input"
-                                                      class="text-input col-12"/>
-            </div>
-            <div class="row offset-11 col-1">
-                <button id="station-tauschen" class="btn btn-primary">
+            <div class="row">
+                <label for="von-input"></label>
+                <input placeholder="Von" type="text" id="von-input" name="von-input"
+                       class="text-input col-12"
+                       data-bs-toggle="modal" data-bs-target="#nach-modal"/>
+
+                <button id="station-tauschen" class="col-12" onclick="console.log('31');">
                     <i id="arrow-icon" class="fa-solid fa-arrow-right-arrow-left fa-rotate-90"></i>
                 </button>
-            </div>
-            <div class="row">
+
                 <label for="nach-input"></label>
-                <input placeholder="Nach" type="text" id="nach-input" name="nach-input" class="text-input col-12"/>
+                <input placeholder="Nach" type="text" id="nach-input" name="nach-input"
+                       class="text-input col-12"/>
             </div>
             <div class="row">
                 <button id="suchen-button" class="btn">Suchen</button>
@@ -56,6 +57,21 @@
         </div>
     </form>
 </div>
+
+<div id="nach-modal" class="modal" tabindex="-1">
+    <div class="modal-fullscreen modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nach</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Ziel auswählen</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
 <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
