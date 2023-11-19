@@ -17,7 +17,7 @@
                 <label for="von-input"></label>
                 <input placeholder="Von" type="text" id="von-input" name="von-input"
                        class="text-input col-12"
-                       data-bs-toggle="modal" data-bs-target="#nach-modal"/>
+                       data-bs-toggle="modal" data-bs-target="#von-modal"/>
 
                 <button id="station-tauschen" class="col-12" onclick="console.log('31');">
                     <i id="arrow-icon" class="fa-solid fa-arrow-right-arrow-left fa-rotate-90"></i>
@@ -25,7 +25,7 @@
 
                 <label for="nach-input"></label>
                 <input placeholder="Nach" type="text" id="nach-input" name="nach-input"
-                       class="text-input col-12"/>
+                       class="text-input col-12" data-bs-toggle="modal" data-bs-target="#nach-modal"/>
             </div>
             <div class="row">
                 <button id="suchen-button" class="btn">Suchen</button>
@@ -41,10 +41,7 @@
                 </button>
             </div>
             <div class="row mt-2">
-                <div class="col-6">
-                    Anger
-                </div>
-                <button type="button" class="btn btn-primary col-6" data-mdb-toggle="modal"
+                <button type="button" class="btn btn-primary col-12" data-mdb-toggle="modal"
                         data-mdb-target="#exampleModal">
                     <i class="fa-solid fa-calendar-days"></i>Zwischenhalte hinzufügen/entfernen
                 </button>
@@ -58,6 +55,23 @@
     </form>
 </div>
 
+<div id="von-modal" class="modal" tabindex="-1">
+    <div class="modal-fullscreen modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Von</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input placeholder="Von" type="text" id="von-input-modal"
+                       class="text-input col-12"/>
+                <ul id="von-liste" class="list-group">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="nach-modal" class="modal" tabindex="-1">
     <div class="modal-fullscreen modal-dialog">
         <div class="modal-content">
@@ -66,7 +80,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Ziel auswählen</p>
+                <input placeholder="Nach" type="text" id="nach-input-modal"
+                       class="text-input col-12"/>
             </div>
         </div>
     </div>
@@ -77,6 +92,6 @@
 <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
-<script src="popup.js"></script>
+<script type="text/javascript" src="popup.js"></script>
 </body>
 </html>
