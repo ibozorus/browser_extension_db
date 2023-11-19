@@ -1,8 +1,13 @@
 $(function () {
-    $("#datepicker").datepicker();
-
-    var clientId = "2af844b40b41cd154f776bb1eb1fb6e4";
-    var clientKey = "d7c2bbe3ffe6eccff03fcbb25dbc6d41";
+    $("#zort").flatpickr({
+        enableTime: true,
+        inline: true,
+        dateFormat: "d.m.Y H:i",
+        locale: "de"
+    });
+    // $(".flatpickr-calendar").addClass("col-12 w-100");
+    const clientId = "2af844b40b41cd154f776bb1eb1fb6e4";
+    const clientKey = "d7c2bbe3ffe6eccff03fcbb25dbc6d41";
 
     var myHeaders = new Headers();
     myHeaders.append("DB-Client-Id", clientId);
