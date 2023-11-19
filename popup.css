@@ -5,7 +5,9 @@ body {
     min-width: 500px;
     min-height: 550px;
 }
-
+.btn{
+    align-items: center;
+}
 .text-input {
     background-color: #f0f3f5;
     border: none;
