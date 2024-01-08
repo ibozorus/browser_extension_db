@@ -9,6 +9,8 @@ $(function () {
     const clientId = "2af844b40b41cd154f776bb1eb1fb6e4";
     const clientKey = "d7c2bbe3ffe6eccff03fcbb25dbc6d41";
 
+    // C===3 <- Pimml :D Lg SNIF
+
     var myHeaders = new Headers();
     myHeaders.append("DB-Client-Id", clientId);
     myHeaders.append("DB-Api-Key", clientKey);
