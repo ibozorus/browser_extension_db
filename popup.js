@@ -14,8 +14,9 @@ $(function () {
         redirect: 'follow'
     };
 
-    const setStopValue = (id, value) => {
+    const setStopValue = (id, value, evaId) => {
         $(id).val(value);
+        $(id).attr("data-eva-id", evaId);
         $('.modal').modal('hide');
     }
 
@@ -40,7 +41,7 @@ $(function () {
                                   </li>`);
 
                         $(".stop-list-item").on("click", function () {
-                            setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'))
+                            setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'), $(this).attr('data-eva-id'))
                         })
                     }
                 })
