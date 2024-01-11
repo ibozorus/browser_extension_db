@@ -35,7 +35,7 @@ $(function () {
                     let stopPlaces = Object.values(result);
                     for (let i = 0; i < stopPlaces.length; i++) {
                         $('#' + listId).append(`
-                                    <li class="list-group-item stop-list-item" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].name}" > 
+                                    <li class="list-group-item stop-list-item" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].name}" > 
                                        <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
                                   </li>`);
 
