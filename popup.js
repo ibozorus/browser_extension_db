@@ -62,3 +62,11 @@ $(function () {
 
     
 });
+
+$("#suchen-button").on("click", function(e) {
+    // e.preventDefault();
+    let start = $("#von-input").val();
+    let dst = $("#nach-input").val();
+
+    console.log(start, dst)
+})
