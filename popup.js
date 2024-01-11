@@ -6,6 +6,13 @@ $(function () {
         locale: "de"
     });
 
+    const date = new Date();
+    $("#hin-datum").html(date.toLocaleDateString("de-DE") + " " + date.getHours() + ":"+ date.getMinutes());
+    $("#apply-hinfahrt").on("click", () => {
+        $("#hin-datum").html(' ' + $("#hinfahrt-kalender").val());
+        $("#hinfahrt-modal").modal("hide");
+    });
+
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     var requestOptions = {

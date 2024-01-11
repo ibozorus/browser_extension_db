@@ -57,14 +57,15 @@
                                 data-bs-target="#hinfahrt-modal">
                             <i class="fa-solid fa-calendar-days"></i>
                             Hinfahrt ändern
+                            <span id="hin-datum"></span>
                         </button>
                     </div>
-<!--                    <div class="row mt-2 col-12">-->
-<!--                        <button type="button" class="btn d-flex justify-content-start" data-bs-toggle="modal"-->
-<!--                                data-bs-target="#rueckfahrt-modal">-->
-<!--                            <i class="fa-solid fa-calendar-days"></i>Rückfahrt ändern-->
-<!--                        </button>-->
-<!--                    </div>-->
+                    <!--                    <div class="row mt-2 col-12">-->
+                    <!--                        <button type="button" class="btn d-flex justify-content-start" data-bs-toggle="modal"-->
+                    <!--                                data-bs-target="#rueckfahrt-modal">-->
+                    <!--                            <i class="fa-solid fa-calendar-days"></i>Rückfahrt ändern-->
+                    <!--                        </button>-->
+                    <!--                    </div>-->
                     <div class="row mt-2  col-12">
                         <button type="button" class="btn d-flex justify-content-start" data-mdb-toggle="modal"
                                 data-mdb-target="#exampleModal">
@@ -121,32 +122,33 @@
             <div class="modal-content container">
                 <div class="modal-header">
                     <h5 class="modal-title">Hinfahrt hinzufügen</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
                 </div>
                 <div class="modal-body row">
                     <input id="hinfahrt-kalender" class="kalender flatpickr flatpickr-input active col-12"
                            type="hidden" placeholder="Datum auswählen"
                            data-id="datetime" readonly="readonly">
+                    <a id="apply-hinfahrt" type="button" class="apply-button btn">Übernehmen</a>
                 </div>
             </div>
         </div>
     </div>
-<!--    <div id="rueckfahrt-modal" class="modal" tabindex="-1">-->
-<!--        <div class="modal-fullscreen modal-dialog">-->
-<!--            <div class="modal-content container">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title">Rückfahrt hinzufügen</h5>-->
-<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                </div>-->
-<!--                <div class="modal-body row">-->
-<!--                    <input id="rueckfahrt-kalender" class="kalender flatpickr flatpickr-input active col-12"-->
-<!--                           type="hidden" placeholder="Datum auswählen"-->
-<!--                           data-id="datetime" readonly="readonly">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+    <!--    <div id="rueckfahrt-modal" class="modal" tabindex="-1">-->
+    <!--        <div class="modal-fullscreen modal-dialog">-->
+    <!--            <div class="modal-content container">-->
+    <!--                <div class="modal-header">-->
+    <!--                    <h5 class="modal-title">Rückfahrt hinzufügen</h5>-->
+    <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+    <!--                </div>-->
+    <!--                <div class="modal-body row">-->
+    <!--                    <input id="rueckfahrt-kalender" class="kalender flatpickr flatpickr-input active col-12"-->
+    <!--                           type="hidden" placeholder="Datum auswählen"-->
+    <!--                           data-id="datetime" readonly="readonly">-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
 
-<!--    </div>-->
+    <!--    </div>-->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
     <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
