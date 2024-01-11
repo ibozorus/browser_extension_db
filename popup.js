@@ -1,5 +1,5 @@
 $(function () {
-    $("#zort").flatpickr({
+    $(".kalender").flatpickr({
         enableTime: true,
         inline: true,
         dateFormat: "d.m.Y H:i",
@@ -55,10 +55,10 @@ $(function () {
         e.preventDefault();
     });
 
-    
+
 });
 
-$("#suchen-button").on("click", function(e) {
+$("#suchen-button").on("click", function (e) {
     // e.preventDefault();
     let start = $("#von-input").val();
     let dst = $("#nach-input").val();
