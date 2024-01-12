@@ -12,14 +12,19 @@ $(function () {
     $(".kalender").flatpickr({
         enableTime: true,
         inline: true,
-        dateFormat: "d.m.Y H:i",
+        dateFormat: "Z",
         locale: "de"
     });
 
+    function parseIsoToDe(d){
+        return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+    }
+
     const date = new Date();
-    $("#hin-datum").html(date.toLocaleDateString("de-DE") + " " + date.getHours() + ":" + date.getMinutes());
+    $("#hin-datum").html(parseIsoToDe(new Date(date.toISOString())));
     $("#apply-hinfahrt").on("click", () => {
-        $("#hin-datum").html(' ' + $("#hinfahrt-kalender").val());
+        let date = new Date($("#hinfahrt-kalender").val())
+        $("#hin-datum").html(parseIsoToDe(date));
         $("#hinfahrt-modal").modal("hide");
     });
 
