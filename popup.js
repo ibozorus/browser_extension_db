@@ -4,6 +4,10 @@ $(function () {
         $("#verbindungs-suche").hide();
         $("#fahrplan-suche").show();
     })
+    $("#homepage").on("click", () => {
+        $("#verbindungs-suche").show();
+        $("#fahrplan-suche").hide();
+    })
 
     $(".kalender").flatpickr({
         enableTime: true,
