@@ -49,6 +49,7 @@ $(function () {
     }
     const fetchDepartures = (id) => {
         $('.modal').modal('hide');
+        $('#fahrplan-ergebnis-liste').empty();
         let kalender = $("#abfahrts-kalender");
         let when;
         if(kalender.val() != ""){
