@@ -11,12 +11,12 @@
 </head>
 <body>
 <div id="navbar">
-    <img src="SNIF-ROT.png" alt="SNIF-Logo" id="png">
     <h1 id="header">DB Sniffer</h1>
-    
 </div>
-<div class="content">
 
+<img src="SNIF-ROT.png" alt="SNIF-Logo" id="png">
+
+<div class="content">
 <div class="container">
     
     
@@ -39,7 +39,18 @@
             <div class="row">
                 <button id="suchen-button" class="btn">Suchen</button>
             </div>
-            <div class="row">
+            
+            <!-- <div class="results">
+                <table class="results-table">
+                    <tr>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </table>
+            </div> -->
+
+            <!-- <div class="row">
 
                 <div class="row mt-2 col-12">
                     <button type="button" class="btn d-flex justify-content-start" data-bs-toggle="modal"
@@ -65,7 +76,7 @@
                             data-mdb-target="#exampleModal">
                         <i class="fa-solid fa-calendar-days"></i>Verkehrsmittel
                     </button>
-                </div>
+                </div> -->
             </div>
         </div>
     </form>
@@ -75,7 +86,7 @@
     <div class="modal-fullscreen modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Von</h5>
+                <h5 class="modal-title">Startpunkt wählen</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -92,7 +103,7 @@
     <div class="modal-fullscreen modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Nach</h5>
+                <h5 class="modal-title">Endpunkt wählen</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -129,6 +140,7 @@
     <script src="node_modules/flatpickr/dist/flatpickr.min.js"></script>
     <script src="node_modules/flatpickr/dist/l10n/de.js"></script>
     <script type="text/javascript" src="popup.js"></script>
+</div>
 </div>
 </body>
 </html>

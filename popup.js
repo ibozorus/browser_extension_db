@@ -5,23 +5,18 @@ $(function () {
         dateFormat: "d.m.Y H:i",
         locale: "de"
     });
-    // $(".flatpickr-calendar").addClass("col-12 w-100");
-    const clientId = "2af844b40b41cd154f776bb1eb1fb6e4";
-    const clientKey = "d7c2bbe3ffe6eccff03fcbb25dbc6d41";
 
     var myHeaders = new Headers();
-    myHeaders.append("DB-Client-Id", clientId);
-    myHeaders.append("DB-Api-Key", clientKey);
-    myHeaders.append("Accept", "application/vnd.de.db.ris+json");
-    myHeaders.append("Access-Control-Allow-Origin", "*");
+    myHeaders.append("Accept", "application/json");
     var requestOptions = {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow'
     };
 
-    const setStopValue = (id, value) => {
+    const setStopValue = (id, value, evaId) => {
         $(id).val(value);
+        $(id).attr("data-eva-id", evaId);
         $('.modal').modal('hide');
     }
 
@@ -35,18 +30,18 @@ $(function () {
         }
         let listId = $(this).attr("id").split("-")[0] + "-liste";
         let inputId = $(this).attr("id").split("-")[0] + "-input";
-        fetch(`https://apis.deutschebahn.com/db-api-marketplace/apis/ris-stations/v1/stop-places/by-name/${station}?limit=20`, requestOptions)
+        fetch(`https://v6.db.transport.rest/stations?query=${station}&limit=20&fuzzy=true&completion=true`, requestOptions)
             .then(response => {
                 response.json().then(result => {
-                    let stopPlaces = result.stopPlaces;
+                    let stopPlaces = Object.values(result);
                     for (let i = 0; i < stopPlaces.length; i++) {
                         $('#' + listId).append(`
-                                    <li class="list-group-item stop-list-item" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].names.DE.nameLong}" > 
-                                       <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].names.DE.nameLong} 
+                                    <li class="list-group-item stop-list-item" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].name}" > 
+                                       <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
                                   </li>`);
 
                         $(".stop-list-item").on("click", function () {
-                            setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'))
+                            setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'), $(this).attr('data-eva-id'))
                         })
                     }
                 })
@@ -62,3 +57,11 @@ $(function () {
 
     
 });
+
+$("#suchen-button").on("click", function(e) {
+    // e.preventDefault();
+    let start = $("#von-input").val();
+    let dst = $("#nach-input").val();
+
+    console.log(start, dst)
+})
