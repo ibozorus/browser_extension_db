@@ -49,7 +49,13 @@ $(function () {
     }
     const fetchDepartures = (id) => {
         $('.modal').modal('hide');
-        let when = $("#abfahrts-kalender").val();
+        let kalender = $("#abfahrts-kalender");
+        let when;
+        if(kalender.val() != ""){
+            when = kalender.val();
+        }else{
+            when = new Date().toISOString();
+        }
         fetch(`https://v6.db.transport.rest/stops/${id}/departures?when=${when}&duration=10&results=10&linesOfStops=true&remarks=true&language=en`, requestOptions)
             .then(response => {
                 response.json().then(result => {
