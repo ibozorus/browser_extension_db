@@ -255,11 +255,25 @@ $(function () {
                         let parsed_start_time = format_time(start_time);
                         let parsed_end_time = format_time(arrival_time);
 
+
+                        // let result_times = parsed_end_time - parsed_start_time;
+
                         let nach = all_data.legs[0].direction;
                         let gleis_von = all_data.legs[0].departurePlatform;
-                        let gleich_ankunft = all_data.legs[0].plannedArrivalPlatform;
+                        let gleis_ankunft_geplant = all_data.legs[0].plannedArrivalPlatform;
+                        let gleis_ankunft_tatsächlich = all_data.legs[0].arrivalPlatform
 
+                        let störungen = all_data.legs[0].remarks[1].type
+                        // console.log(störungen)
+                        // let störungen_message = "";
 
+                        // if(störungen === "status") {
+
+                        //     // störungen_message = all_data.legs[0].remarks[1].name
+                        // } else {
+                        //     störungen_message = "";
+                        // }
+                        
                         $("#result-items").append(`
                         <div class="accordion accordion-flush" id="${i}">
                             <div class="accordion-item">
@@ -280,7 +294,12 @@ $(function () {
                                 
                                 </h2>
                                 <div id="flush-collapse-${i}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">Nach ${nach}</div>
+                                <div class="accordion-body">
+                                <span>nach ${nach} von Gleis ${gleis_von}</span>
+                                
+                                
+                                <span id="aktuelle-meldungen"></span>
+                                </div>
                                 </div>
                             </div>
                         </div>

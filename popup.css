@@ -78,6 +78,10 @@ body {
     
 }
 
+#aktuelle-meldungen{
+    color: red;
+    font-size: smaller;
+}
 #re-number-div {
     background-color: rgba(153, 153, 153);
     color: white;
