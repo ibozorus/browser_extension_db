@@ -38,6 +38,16 @@ $(function () {
         return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
     }
 
+    let withBikeValue = document.getElementById("withBike").value;
+    let withBike = false;
+    $("#apply-options").on("click", function()
+    {
+        $('.modal').modal('hide');
+        if (withBikeValue === "on") {
+            withBike = true;
+        }
+    });
+
     const date = new Date();
     $("#hin-datum").html(parseIsoToDe(new Date(date.toISOString())));
     $("#abfahrts-datum").html(parseIsoToDe(new Date(date.toISOString())));
@@ -92,7 +102,6 @@ $(function () {
         $('#fahrplan-ergebnis-modal').modal('show');
 
     }
-
 
     $('.text-input-modal').on("input", function fetchStations() {
         $('#von-liste').empty();
@@ -223,7 +232,7 @@ $(function () {
                         // } else {
                         //     störungen_message = "";
                         // }
-                        
+
                         $("#result-items").append(`
                         <div class="accordion accordion-flush" id="${i}">
                             <div class="accordion-item">
