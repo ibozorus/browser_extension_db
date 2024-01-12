@@ -41,6 +41,33 @@
                 <div class="row">
                     <button id="fahrplan-suchen" class="btn suchen-button">Suchen</button>
                 </div>
+                <div class="row mt-2 col-12">
+                    <button type="button" class="btn d-flex justify-content-start row" data-bs-toggle="modal"
+                            data-bs-target="#abfahrts-modal">
+                        <div class="col-6">
+                                <span>
+                            <i class="fa-solid fa-calendar-days"></i>
+                            Abfahrtsdatum ändern</span>
+                        </div>
+                        <span id="abfahrts-datum" class="col-6"></span>
+                    </button>
+                </div>
+                <div id="abfahrts-modal" class="modal" tabindex="-1">
+                    <div class="modal-fullscreen modal-dialog">
+                        <div class="modal-content container">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Abfahrtsdatum</h5>
+                                <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                            </div>
+                            <div class="modal-body row">
+                                <input id="abfahrts-kalender" class="kalender flatpickr flatpickr-input active col-12"
+                                       type="hidden" placeholder="Datum auswählen"
+                                       data-id="datetime" readonly="readonly">
+                                <a id="apply-abfahrt" type="button" class="apply-button btn">Übernehmen</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

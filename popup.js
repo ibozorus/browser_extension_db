@@ -22,10 +22,16 @@ $(function () {
 
     const date = new Date();
     $("#hin-datum").html(parseIsoToDe(new Date(date.toISOString())));
+    $("#abfahrts-datum").html(parseIsoToDe(new Date(date.toISOString())));
     $("#apply-hinfahrt").on("click", () => {
         let date = new Date($("#hinfahrt-kalender").val())
         $("#hin-datum").html(parseIsoToDe(date));
         $("#hinfahrt-modal").modal("hide");
+    });
+    $("#apply-abfahrt").on("click", () => {
+        let date = new Date($("#abfahrts-kalender").val())
+        $("#abfahrts-datum").html(parseIsoToDe(date));
+        $("#abfahrts-modal").modal("hide");
     });
 
     var myHeaders = new Headers();
@@ -43,11 +49,12 @@ $(function () {
     }
     const fetchDepartures = (id) => {
         $('.modal').modal('hide');
-        fetch(`https://v6.db.transport.rest/stops/${id}/departures?duration=10&results=10&linesOfStops=true&remarks=true&language=en`, requestOptions)
+        let when = $("#abfahrts-kalender").val();
+        fetch(`https://v6.db.transport.rest/stops/${id}/departures?when=${when}&duration=10&results=10&linesOfStops=true&remarks=true&language=en`, requestOptions)
             .then(response => {
                 response.json().then(result => {
                     let departuresList = result.departures;
-                    console.log(departuresList)
+                    // console.log(departuresList)
                     for (let i = 0; i < departuresList.length; i++) {
                         $('#fahrplan-ergebnis-liste').append(`
                                     <li class="list-group-item stop-list-item" data-trip-id="${departuresList[i].tripId}" > 
