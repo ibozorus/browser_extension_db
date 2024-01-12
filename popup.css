@@ -4,6 +4,8 @@ body {
     /* padding: 20px; */
     min-width: 500px;
     min-height: 550px;
+    
+    
 }
 .btn{
     align-items: center;
@@ -61,4 +63,81 @@ body {
 
 .modal-title {
     color: white;
+}
+#start-stop-time {
+    position: relative;
+    right: 2%;
+}
+
+#start_element {
+    position: relative;
+    right: 2%;
+    margin-top: 2%;
+    text-align: left;
+    justify-content: space-between;
+    
+}
+
+#re-number-div {
+    background-color: rgba(153, 153, 153);
+    color: white;
+    width: 450px;
+    text-align: center;
+    position: relative;
+    right: 2%;
+    border-radius: 5px;
+    margin-top: -3%;
+    /* right:50%;   */
+    
+}
+#row-item-clickable{
+    background-color:rgba(217, 217, 217) ;
+    margin-bottom: 1%;
+}
+
+.elements-listed {
+    background-color: rgba(217, 217, 217);
+    margin-bottom: 5px;
+    height: 100px;
+    width: 110%;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 25px;
+}
+
+#start-stop-elems {
+    display: flex;
+    justify-content: space-between;
+}
+
+#stop-elem {
+    margin-right: 109px;
+}
+
+.modal{
+    overflow-y: scroll;
+    height: 100vh; /* Passe die Höhe nach Bedarf an */
+    padding-right: 17px; /* Kompensiere die Standard-Scrollbar-Breite */
+}
+
+/* Benutzerdefiniertes Scrollbar-Design (optional) */
+.modal::-webkit-scrollbar {
+    width: 12px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 0px;
+}
+
+.modal::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.elements-listed {
+    background-color:  rgba(217, 217, 217);
+}
+
+#start-u-ankuftszeit {
+    font-size: larger;
 }
