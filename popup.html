@@ -15,23 +15,40 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">DB-Sniffer</a>
             <div class="dropstart">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a id="wechsel-fahrplan" class="dropdown-item" href="#">Fahrplan anzeigen</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
 
-<div class="content">
+
+<div id="fahrplan-suche" class="content">
     <div class="container">
+        <form>
+            <div class="container">
+                <div class="row">
+                    <label for="haltestelle-input"></label>
+                    <input placeholder="Von" type="text" id="haltestelle-input" name="von-input"
+                           class="text-input col-12"
+                           data-bs-toggle="modal" data-bs-target="#fahrplan-modal"/>
+                </div>
+                <div class="row">
+                    <button id="fahrplan-suchen" class="btn suchen-button">Suchen</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
+</div>
 
+<div id="verbindungs-suche" class="content">
+    <div class="container">
         <form>
             <div class="container">
                 <div class="row">
@@ -49,7 +66,7 @@
                            class="text-input col-12" data-bs-toggle="modal" data-bs-target="#nach-modal"/>
                 </div>
                 <div class="row">
-                    <button id="suchen-button" class="btn">Suchen</button>
+                    <button id="suchen-button" class="suchen-button btn">Suchen</button>
                 </div>
 
                 <!-- <div class="results">
@@ -137,7 +154,7 @@
             <div class="modal-content container">
                 <div class="modal-header">
                     <h5 class="modal-title">Hinfahrt hinzufügen</h5>
-<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                    <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
                 </div>
                 <div class="modal-body row">
                     <input id="hinfahrt-kalender" class="kalender flatpickr flatpickr-input active col-12"
@@ -164,15 +181,16 @@
     <!--        </div>-->
 
     <!--    </div>-->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
-    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
-    <script src="node_modules/flatpickr/dist/flatpickr.min.js"></script>
-    <script src="node_modules/flatpickr/dist/l10n/de.js"></script>
-    <script type="text/javascript" src="popup.js"></script>
 </div>
 </div>
+
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
+<script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+<script src="node_modules/flatpickr/dist/flatpickr.min.js"></script>
+<script src="node_modules/flatpickr/dist/l10n/de.js"></script>
+<script type="text/javascript" src="popup.js"></script>
 </body>
 </html>

@@ -1,4 +1,10 @@
 $(function () {
+    $("#fahrplan-suche").hide();
+    $("#wechsel-fahrplan").on("click", () => {
+        $("#verbindungs-suche").hide();
+        $("#fahrplan-suche").show();
+    })
+
     $(".kalender").flatpickr({
         enableTime: true,
         inline: true,
@@ -7,7 +13,7 @@ $(function () {
     });
 
     const date = new Date();
-    $("#hin-datum").html(date.toLocaleDateString("de-DE") + " " + date.getHours() + ":"+ date.getMinutes());
+    $("#hin-datum").html(date.toLocaleDateString("de-DE") + " " + date.getHours() + ":" + date.getMinutes());
     $("#apply-hinfahrt").on("click", () => {
         $("#hin-datum").html(' ' + $("#hinfahrt-kalender").val());
         $("#hinfahrt-modal").modal("hide");
