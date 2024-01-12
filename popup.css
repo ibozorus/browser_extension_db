@@ -47,10 +47,10 @@ body {
 }
 
 
-#suchen-button {
-    color: rgb(255, 255, 255);
-    background-color: rgb(236, 0, 22);
-    margin-top: 5%;
+.suchen-button {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(236, 0, 22) !important;
+    margin-top: 5% !important;
 }
 
 
