@@ -36,6 +36,25 @@ $(function () {
         $(id).attr("data-eva-id", evaId);
         $('.modal').modal('hide');
     }
+    const fetchDepartures = (id) => {
+        $('.modal').modal('hide');
+        fetch(`https://v6.db.transport.rest/stops/${id}/departures?duration=10&results=10&linesOfStops=true&remarks=true&language=en`, requestOptions)
+            .then(response => {
+                response.json().then(result => {
+                    let departuresList = result.departures;
+                    console.log(departuresList)
+                    for (let i = 0; i < departuresList.length; i++) {
+                        $('#fahrplan-ergebnis-liste').append(`
+                                    <li class="list-group-item stop-list-item" data-trip-id="${departuresList[i].tripId}" > 
+                                       ${departuresList[i].stop.name} nach ${departuresList[i].destination.name} 
+                                  </li>`);
+                    }
+                })
+            })
+
+        $('#fahrplan-ergebnis-modal').modal('show');
+
+    }
 
 
     $('.text-input-modal').on("input", function fetchStations() {
@@ -56,15 +75,43 @@ $(function () {
                                     <li class="list-group-item stop-list-item" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].name}" > 
                                        <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
                                   </li>`);
-
-                        $(".stop-list-item").on("click", function () {
-                            setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'), $(this).attr('data-eva-id'))
-                        })
                     }
+                    $(".stop-list-item").on("click", function () {
+                        setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'), $(this).attr('data-eva-id'))
+                    })
                 })
             })
             .catch(error => console.log('error', error));
     });
+
+    $('#haltestelle-input-modal').on("input", function fetchStations() {
+        $('#fahrplan-liste').empty();
+        let station = $(this).val();
+        if (station == null || station === "") {
+            return;
+        }
+        let listId = "fahrplan-liste";
+        let inputId = "haltestelle-input";
+        fetch(`https://v6.db.transport.rest/stations?query=${station}&limit=20&fuzzy=true&completion=true`, requestOptions)
+            .then(response => {
+                response.json().then(result => {
+                    let stopPlaces = Object.values(result);
+                    for (let i = 0; i < stopPlaces.length; i++) {
+                        $('#' + listId).append(`
+                                    <li class="list-group-item fahrplan-list-item" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].name}" > 
+                                       <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
+                                  </li>`);
+
+
+                    }
+                    $(".fahrplan-list-item").on("click", function () {
+                        fetchDepartures($(this).attr("data-eva-id"));
+                    })
+                })
+            })
+            .catch(error => console.log('error', error));
+    });
+
     $("#station-tauschen").on("click", function (e) {
         let temp = $("#von-input").val();
         $("#von-input").val($("#nach-input").val());

@@ -45,6 +45,38 @@
         </form>
     </div>
 
+    <div id="fahrplan-modal" class="modal" tabindex="-1">
+        <div class="modal-fullscreen modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Haltestelle wählen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input placeholder="Von" type="text" id="haltestelle-input-modal"
+                           class="text-input-modal col-12"/>
+                    <ul id="fahrplan-liste" class="list-group">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fahrplan-ergebnis-modal" class="modal" tabindex="-1">
+        <div class="modal-fullscreen modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Abfahrten</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="fahrplan-ergebnis-liste" class="list-group">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="verbindungs-suche" class="content">
