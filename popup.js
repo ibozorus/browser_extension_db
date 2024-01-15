@@ -14,56 +14,6 @@ function format_time(time) {
     var parsed_result = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
     return parsed_result;
 }
-function addAccordionToDiv(parentDiv, counter, start, destination, line, startTime, endTime) {
-    var detailsButton = document.createElement("button");
-    detailsButton.className = "btn btn-outline-secondary btn-sm";
-    detailsButton.type = "button";
-    detailsButton.innerHTML = "Details";
-
-    var accordionContainer = document.createElement("div");
-    accordionContainer.className = "accordion";
-    accordionContainer.id = `accordion-${counter}`;
-
-    var accordionItem = document.createElement("div");
-    accordionItem.className = "accordion-item";
-
-    var accordionHeader = document.createElement("h2");
-    accordionHeader.className = "accordion-header";
-    accordionHeader.id = `heading-${counter}`;
-
-    var accordionButton = document.createElement("button");
-    accordionButton.className = "accordion-button collapsed";
-    accordionButton.type = "button";
-    accordionButton.setAttribute("data-bs-toggle", "collapse");
-    accordionButton.setAttribute("data-bs-target", `#collapse-${counter}`);
-    accordionButton.setAttribute("aria-expanded", "false");
-    accordionButton.setAttribute("aria-controls", `collapse-${counter}`);
-    accordionButton.innerHTML = "Details";
-
-    var accordionCollapse = document.createElement("div");
-    accordionCollapse.id = `collapse-${counter}`;
-    accordionCollapse.className = "accordion-collapse collapse";
-    accordionCollapse.setAttribute("aria-labelledby", `heading-${counter}`);
-    accordionCollapse.setAttribute("data-bs-parent", `#accordion-${counter}`);
-
-    var accordionBody = document.createElement("div");
-    accordionBody.className = "accordion-body";
-    accordionBody.innerHTML = `
-        <strong>Start:</strong> ${start}<br>
-        <strong>Ziel:</strong> ${destination}<br>
-        <strong>Linie:</strong> ${line}<br>
-        <strong>Abfahrt:</strong> ${startTime}<br>
-        <strong>Ankunft:</strong> ${endTime}<br>
-    `;
-
-    parentDiv.appendChild(detailsButton);
-    parentDiv.appendChild(accordionContainer);
-    accordionContainer.appendChild(accordionItem);
-    accordionItem.appendChild(accordionHeader);
-    accordionHeader.appendChild(accordionButton);
-    accordionItem.appendChild(accordionCollapse);
-    accordionCollapse.appendChild(accordionBody);
-}
 
 
 $(function () {

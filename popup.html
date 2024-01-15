@@ -156,34 +156,47 @@
         </form>
     </div>
 
-    <div id="von-modal" class="modal" tabindex="-1">
-        <div class="modal-fullscreen modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Startpunkt wählen</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input placeholder="Von" type="text" id="von-input-modal"
-                           class="text-input-modal col-12"/>
-                    <ul id="von-liste" class="list-group">
-
-                    </ul>
-                </div>
+<div id="von-modal" class="modal" tabindex="-1">
+    <div class="modal-fullscreen modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Startpunkt wählen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input placeholder="Von" type="text" id="von-input-modal"
+                       class="text-input-modal col-12"/>
+                <ul id="von-liste" class="list-group">
+                </ul>
             </div>
         </div>
     </div>
-    <div id="nach-modal" class="modal" tabindex="-1">
-        <div class="modal-fullscreen modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Endpunkt wählen</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input placeholder="Nach" type="text" id="nach-input-modal"
-                           class="text-input-modal col-12"/>
-                    <ul id="nach-liste" class="list-group">
+</div>
+
+<div id="ergebnisse-modal" class="modal" tabindex="-1">
+    <div class="modal-fullscreen modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ergebnisse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div id="result-items"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="nach-modal" class="modal" tabindex="-1">
+    <div class="modal-fullscreen modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Endpunkt wählen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input placeholder="Nach" type="text" id="nach-input-modal"
+                       class="text-input-modal col-12"/>
+                <ul id="nach-liste" class="list-group">
 
                     </ul>
                 </div>
