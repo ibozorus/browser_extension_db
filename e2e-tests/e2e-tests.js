@@ -66,6 +66,24 @@ describe('First script', function () {
         assert.equal(true, await driver.findElement(By.css("#result-items")).isDisplayed());
 
     });
+    it('Options and Hinfahrtsdatum Sichtbarkeitstest', async function () {
+        await driver.get('file:///C:/Users/iekorkmaz/WebstormProjects/browser_extension_db/popup.html');
+        let hinfahrtButton = await driver.findElement(By.css('#verbindungs-suche > div.container > form > div > div:nth-child(3) > button'));
+        let optionsButton = await driver.findElement(By.css('#verbindungs-suche > div.container > form > div > div:nth-child(4) > button'));
+        hinfahrtButton.click();
+        assert.equal(true, await driver.findElement(By.css("#hinfahrt-modal > div > div > div.modal-body.row > div")).isDisplayed());
+        assert.equal(true, await driver.findElement(By.css("#apply-hinfahrt")).isDisplayed());
+        await driver.findElement(By.css("#apply-hinfahrt")).click();
+        optionsButton.click();
+        assert.equal(true, await driver.findElement(By.css("#options-modal > div > div > div.modal-body.row > div.form-check.col-6")).isDisplayed());
+        assert.equal(true, await driver.findElement(By.css("#options-modal > div > div > div.modal-body.row > div.form-group.col-6")).isDisplayed());
+        assert.equal(true, await driver.findElement(By.css("#apply-options")).isDisplayed());
+        await driver.findElement(By.css("#withBike")).click();
+        let maxTransfers = await driver.findElement(By.css("#maxTransfers"));
+        maxTransfers.click();
+        maxTransfers.sendKeys(1);
+        await driver.findElement(By.css("#apply-options")).click();
+    });
 
     after(async () => await driver.quit());
 });
