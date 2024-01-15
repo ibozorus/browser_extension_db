@@ -5,9 +5,18 @@ function getCurrentUnixTimestamp() {
     return unixTimestamp;
 }
 
-function saveStop(id) {
-    let favStops = localStorage.getItem("favStops");
-    localStorage.setItem("favStops", favStops + ";" + id);
+function saveStop(id, name) {
+    let favStops = JSON.parse(localStorage.getItem("favStops"));
+    let isSaved = false;
+    favStops.forEach((el) => {
+        if(el.id === id){
+            isSaved = true;
+        }
+    })
+    if(isSaved) return;
+    let jsonObject = {"id": id, "name": name}
+    favStops.push(jsonObject);
+    localStorage.setItem("favStops", JSON.stringify(favStops));
 }
 
 function format_time(time) {
@@ -21,6 +30,9 @@ function format_time(time) {
 
 
 $(function () {
+    if (localStorage.getItem("favStops") == null || localStorage.getItem("favStops") === "") {
+        localStorage.setItem("favStops", "[]")
+    }
     $("#fahrplan-suche").hide();
     $("#wechsel-fahrplan").on("click", () => {
         $("#verbindungs-suche").hide();
@@ -124,10 +136,10 @@ $(function () {
                         $('#' + listId).append(`
                                     <div>
                                         <li class="list-group-item row"> 
-                                           <button class="btn stop-list-item col-9 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].name}">
+                                           <button class="btn stop-list-item col-9 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value="${stopPlaces[i].name}">
                                                 <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
                                             </button>
-                                            <button class="btn save-button col-2" data-eva-id="${stopPlaces[i].id}">
+                                            <button class="btn save-button col-2" data-target-value="${stopPlaces[i].name}" data-eva-id="${stopPlaces[i].id}">
                                                 <i class="fa-solid fa-floppy-disk"></i>
                                             </button>
                                         </li>
@@ -137,7 +149,7 @@ $(function () {
                         setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'), $(this).attr('data-eva-id'))
                     })
                     $(".save-button").on("click", function () {
-                        saveStop($(this).attr('data-eva-id'));
+                        saveStop($(this).attr('data-eva-id'), $(this).attr('data-target-value'));
                     })
                 })
             })
