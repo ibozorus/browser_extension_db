@@ -119,9 +119,14 @@ $(function () {
                     let stopPlaces = Object.values(result);
                     for (let i = 0; i < stopPlaces.length; i++) {
                         $('#' + listId).append(`
-                                    <li class="list-group-item stop-list-item" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].name}" > 
-                                       <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
-                                  </li>`);
+                                    <div>
+                                        <li class="list-group-item row"> 
+                                           <button class="btn stop-list-item col-9 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].name}">
+                                                <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
+                                            </button>
+                                            <i class="fa-solid fa-floppy-disk col-2"></i>
+                                        </li>
+                                    </div>`);
                     }
                     $(".stop-list-item").on("click", function () {
                         setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'), $(this).attr('data-eva-id'))
