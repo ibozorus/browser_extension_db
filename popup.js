@@ -18,6 +18,50 @@ function saveStop(id, name) {
     favStops.push(jsonObject);
     localStorage.setItem("favStops", JSON.stringify(favStops));
 }
+function convertToTimestamp(timeFormat) {
+    // Erstelle ein Date-Objekt aus dem übergebenen Zeitformat
+    var date = new Date(timeFormat);
+
+    // Extrahiere den Timestamp und gib ihn zurück
+    return date.getTime();
+}
+
+
+function berechneZeitDifferenz(zeit1, zeit2) {
+    // Zerlege die Zeitangaben in Stunden und Minuten
+    var teile1 = zeit1.split(':');
+    var teile2 = zeit2.split(':');
+
+    // Konvertiere Stunden und Minuten in Minuten
+    var minuten1 = parseInt(teile1[0]) * 60 + parseInt(teile1[1]);
+    var minuten2 = parseInt(teile2[0]) * 60 + parseInt(teile2[1]);
+
+    // Berechne die Differenz in Minuten
+    var differenzInMinuten = Math.abs(minuten2 - minuten1);
+
+    return differenzInMinuten;
+}
+
+
+function convertUnixTimestamp(timestamp) {
+    // Konvertiere den UNIX-Timestamp in Millisekunden
+    var date = new Date(timestamp * 1000);
+
+    // Erstelle ein Array für die Wochentage und Monate
+    var daysOfWeek = ["So.", "Mo.", "Di.", "Mi.", "Do.", "Fr.", "Sa."];
+    var months = ["Jan.", "Feb.", "März", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sep.", "Okt.", "Nov.", "Dez."];
+
+    // Extrahiere Tag, Monat, Jahr und Wochentag
+    var dayOfWeek = daysOfWeek[date.getUTCDay()];
+    var day = date.getUTCDate();
+    var month = months[date.getUTCMonth()];
+    var year = date.getUTCFullYear();
+
+    // Formatiere das Datum
+    var formattedDate = `${dayOfWeek} ${day} ${month} ${year}`;
+
+    return formattedDate;
+}
 
 function format_time(time) {
     var parsedDate = new Date(time);
@@ -225,16 +269,32 @@ $(function () {
         //     console.log(response)
         // })
 
-        const currentUnixTimestamp = getCurrentUnixTimestamp();
 
-        if (start !== undefined && dst !== undefined) {
+        if(start !== undefined && dst !== undefined) {
             var container = document.getElementById("result-items")
+
 
             document.body.style.height = document.getElementById("main-body").clientHeight + 100 + '%';
             document.body.style.backgroundColor = "white";
 
+            var currentUnixTimestamp = "";
 
-            fetch(`https://v6.db.transport.rest/journeys?from=${start}&departure=${currentUnixTimestamp}&to=${dst}&results=10`).then((response) => {
+            if($(`#hinfahrt-kalender`).val() == "") {
+                currentUnixTimestamp = getCurrentUnixTimestamp();
+            } else {
+
+                currentUnixTimestamp = convertToTimestamp($(`#hinfahrt-kalender`).val()) /1000;
+
+            }
+            $(`#current_date`).empty();
+            $(`#current_date`).append(`
+            Ergebnisse vom ${convertUnixTimestamp(currentUnixTimestamp)}
+            `);
+
+            // console.log(currentUnixTimestamp);
+            // console.log($(`#hinfahrt-kalender`).val());
+
+            fetch(`https://v6.db.transport.rest/journeys?from=${start}&departure=${currentUnixTimestamp}&to=${dst}&results=10&language=de`).then((response) => {
                 // console.log(response);
                 response.json().then((data) => {
                     // console.log(data);
@@ -255,18 +315,24 @@ $(function () {
 
                         let start_time = all_data.legs[0].departure
                         let arrival_time = all_data.legs[0].arrival
-
+                        let planned_arrival = all_data.legs[0].plannedArrival;
+                        let planned_departure = all_data.legs[0].plannedDeparture;
 
                         let parsed_start_time = format_time(start_time);
                         let parsed_end_time = format_time(arrival_time);
+                        let planned_arrival_formatted = format_time(planned_arrival);
+                        let planned_departure_formatted = format_time(planned_departure);
 
+                        let result_time = berechneZeitDifferenz(parsed_start_time, parsed_end_time)
 
                         // let result_times = parsed_end_time - parsed_start_time;
 
                         let nach = all_data.legs[0].direction;
                         let gleis_von = all_data.legs[0].departurePlatform;
                         let gleis_ankunft_geplant = all_data.legs[0].plannedArrivalPlatform;
-                        let gleis_ankunft_tatsächlich = all_data.legs[0].arrivalPlatform
+                        let gleis_ankunft_tatsächlich = all_data.legs[0].arrivalPlatform;
+
+
 
                         // let störungen = all_data.legs[0].remarks[1].type
                         // console.log(störungen)
@@ -285,7 +351,8 @@ $(function () {
                                 <h2 class="accordion-header" id="flush-headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" id="row-item-clickable" data-bs-target="#flush-collapse-${i}" aria-expanded="false" aria-controls="flush-collapseOne">
                                     <div class="elements-listed">
-                                        <p id="start-stop-time"><b>${parsed_start_time} - ${parsed_end_time}</b></p>
+                                        <p id="start-stop-time-planned"><b>${planned_departure_formatted} - ${planned_arrival_formatted}</b><span id="result_time"> | ${result_time}min</span></p>
+                                        <p id="start-stop-time"><b>${parsed_start_time}</b><b id="end_time_parsed">${parsed_end_time}</b></p>
                                         <div id="re-number-div">${re_nr}</div>
                                         <div>
                                             <div id="start_element" class="row">
@@ -300,8 +367,8 @@ $(function () {
                                 </h2>
                                 <div id="flush-collapse-${i}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                <span>nach ${nach} von Gleis ${gleis_von}</span>
-                                
+                                <span id="re_nr_collapsed">${re_nr}</span><br>
+                                <span>nach ${nach}</span>
                                 
                                 <span id="aktuelle-meldungen"></span>
                                 </div>

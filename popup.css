@@ -65,8 +65,11 @@ body {
     color: white;
 }
 #start-stop-time {
+    color: green;
     position: relative;
     right: 2%;
+    margin-top: -10px;
+    font-size: smaller;
 }
 
 #start_element {
@@ -104,7 +107,7 @@ body {
     margin-bottom: 5px;
     height: 100px;
     width: 110%;
-    text-align: center;
+    /* text-align: center; */
     padding-left: 10px;
     padding-right: 25px;
 }
@@ -144,4 +147,34 @@ body {
 
 #start-u-ankuftszeit {
     font-size: larger;
+}
+
+.elements-listed{
+    margin-top: 2%;
+}
+
+#start-stop-time-planned {
+    margin-top: -15px;
+    position: relative;
+    right: 2%;
+}
+
+#end_time_parsed{
+    margin-left: 23px;
+}
+
+#result_time {
+    font-size: small;
+    margin-left: 5px;
+    padding-top: -10px;
+    /* margin-top: -100px; */
+}
+
+#re_nr_collapsed{
+    background-color: rgba(153, 153, 153);
+    border-radius: 5px;
+    width: 50px;
+    color: white;
+    display:inline-block;
+    text-align: center;
 }
