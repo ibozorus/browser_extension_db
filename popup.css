@@ -89,3 +89,28 @@ body {
 .modal-title {
     color: white;
 }
+
+@media (prefers-color-scheme: dark) {
+    background-color: rebeccapurple;
+}
+/*#theme-switch{font-size:20px;position:absolute;top:0;right:35px;z-index:19}*/
+body.darktheme{
+    background-color: #404040;
+    .modal-content {
+        background-color: #404040;
+        .list-group-item {
+            background-color: #5c5c5c;
+            color: white;
+        }
+    }
+    button {
+        color: white;
+    }
+    input {
+        background-color: #5c5c5c;
+    }
+}
+body.darktheme .your-element-name{color:#fff;background-color:#000}
+body.darktheme .lin-element-name a{color:#fff;background-color:#000}
+body.darktheme #your-element-name{color:#fff;background-color:#000}
+body.darktheme your-element-name ul li a{color:#fff;background-color:#000}

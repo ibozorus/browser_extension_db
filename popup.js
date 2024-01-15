@@ -1,4 +1,21 @@
 $(function () {
+    var localTheme = window.localStorage.getItem('data-theme');
+
+    if (!localTheme) {
+        console.log('voreisntellungen');
+        window.localStorage.setItem('data-theme', 'light');
+    }
+
+    if (localTheme === 'dark') {
+        console.log('todarkmode');
+        window.localStorage.removeItem('data-theme');
+        changeToDarkMode();
+    } else {
+        window.localStorage.removeItem('data-theme');
+        changeToLightMode()
+    }
+
+
     $("#zort").flatpickr({
         enableTime: true,
         inline: true,
@@ -20,6 +37,18 @@ $(function () {
         $('.modal').modal('hide');
     }
 
+    ;(function () {
+        const htmlElement = document.querySelector("html")
+        if(htmlElement.getAttribute("data-bs-theme") === 'auto') {
+            function updateTheme() {
+                document.querySelector("html").setAttribute("data-bs-theme",
+                    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme)
+            updateTheme()
+        }
+    })()
 
     $('.text-input-modal').on("input", function fetchStations() {
         $('#von-liste').empty();
@@ -55,7 +84,32 @@ $(function () {
         e.preventDefault();
     });
 
-    
+    function changeToDarkMode() {
+        var currentBody = document.querySelector('body');
+
+        currentBody.classList.add('darktheme');
+
+        window.localStorage.setItem('data-theme', 'dark');
+    }
+
+    function changeToLightMode() {
+        var currentBody = document.querySelector('body');
+
+        currentBody.classList.remove('darktheme');
+
+        window.localStorage.setItem('data-theme', 'light');
+    }
+
+    $("#theme-switch-button").on("click", function () {
+        console.log('click');
+        var currentLocalTheme = window.localStorage.getItem('data-theme');
+
+        if (currentLocalTheme === 'light') {
+            changeToDarkMode();
+        } else {
+            changeToLightMode()
+        }
+    });
 });
 
 $("#suchen-button").on("click", function(e) {
