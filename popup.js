@@ -35,7 +35,7 @@ $(function () {
     }
     $("#fahrplan-suche").hide();
     $("#wechsel-fahrplan").on("click", () => {
-
+        $('#fav-liste').empty();
         let favStops = JSON.parse(localStorage.getItem("favStops"));
         favStops.forEach((el) => {
             $('#fav-liste').append(`
