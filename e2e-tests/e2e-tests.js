@@ -2,7 +2,7 @@
 require("chromedriver");
 
 // import this class from selenium
-const { Builder } = require("selenium-webdriver");
+const {Builder} = require("selenium-webdriver");
 
 (async function openChromeTest() {
     // open chrome browser
@@ -10,7 +10,9 @@ const { Builder } = require("selenium-webdriver");
 
     try {
         // go to example website
-        await driver.get("https://example.com/");
+        await driver.get("file:///C:/Users/iekorkmaz/WebstormProjects/browser_extension_db/popup.html");
+        await driver.manage().window().setRect({ width: 500, height: 550 });
+        await driver.sleep(3000)
     } finally {
         // close the chrome browser
         await driver.quit();
