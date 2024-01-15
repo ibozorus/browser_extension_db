@@ -5,6 +5,10 @@ function getCurrentUnixTimestamp() {
     return unixTimestamp;
 }
 
+function saveStop(id) {
+    let favStops = localStorage.getItem("favStops");
+    localStorage.setItem("favStops", favStops + ";" + id);
+}
 
 function format_time(time) {
     var parsedDate = new Date(time);
@@ -34,15 +38,14 @@ $(function () {
         locale: "de"
     });
 
-    function parseIsoToDe(d){
+    function parseIsoToDe(d) {
         return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
     }
 
     let maximumTransfers = document.getElementById("maxTransfers").value;
     let withBikeValue = document.getElementById("withBike").value;
     let withBike = false;
-    $("#apply-options").on("click", function()
-    {
+    $("#apply-options").on("click", function () {
         $('.modal').modal('hide');
         if (withBikeValue === "on") {
             withBike = true;
@@ -81,9 +84,9 @@ $(function () {
         $('#fahrplan-ergebnis-liste').empty();
         let kalender = $("#abfahrts-kalender");
         let when;
-        if(kalender.val() != ""){
+        if (kalender.val() != "") {
             when = kalender.val();
-        }else{
+        } else {
             when = new Date().toISOString();
         }
         fetch(`https://v6.db.transport.rest/stops/${id}/departures?when=${when}&duration=10&results=10&linesOfStops=true&remarks=true&language=en`, requestOptions)
@@ -124,12 +127,17 @@ $(function () {
                                            <button class="btn stop-list-item col-9 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].name}">
                                                 <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
                                             </button>
-                                            <i class="fa-solid fa-floppy-disk col-2"></i>
+                                            <button class="btn save-button col-2" data-eva-id="${stopPlaces[i].id}">
+                                                <i class="fa-solid fa-floppy-disk"></i>
+                                            </button>
                                         </li>
                                     </div>`);
                     }
                     $(".stop-list-item").on("click", function () {
                         setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'), $(this).attr('data-eva-id'))
+                    })
+                    $(".save-button").on("click", function () {
+                        saveStop($(this).attr('data-eva-id'));
                     })
                 })
             })
@@ -171,7 +179,7 @@ $(function () {
         e.preventDefault();
     });
 
-    $("#suchen-button").on("click", function(e) {
+    $("#suchen-button").on("click", function (e) {
         e.preventDefault();
         // let start = $("#von-input").attr("data-eva-id");
         // let dst = $("#nach-input").attr("data-eva-id");
@@ -186,12 +194,11 @@ $(function () {
 
         const currentUnixTimestamp = getCurrentUnixTimestamp();
 
-        if(start !== undefined && dst !== undefined) {
+        if (start !== undefined && dst !== undefined) {
             var container = document.getElementById("result-items")
 
             document.body.style.height = document.getElementById("main-body").clientHeight + 100 + '%';
             document.body.style.backgroundColor = "white";
-
 
 
             fetch(`https://v6.db.transport.rest/journeys?from=${start}&departure=${currentUnixTimestamp}&to=${dst}&results=10`).then((response) => {
@@ -297,12 +304,10 @@ $(function () {
             var newError = document.createElement('strong');
 
             newError.innerHTML = "Fehler: Sie haben keinen Start- oder Zielpunkt festgelegt!";
-            newError.style.textAlign="center";
-            newError.style.color="red";
+            newError.style.textAlign = "center";
+            newError.style.color = "red";
             container.appendChild(newError);
         }
-
-
 
 
         // var cell1 = table.insertRow(0);
