@@ -38,6 +38,7 @@ $(function () {
         return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
     }
 
+    let maximumTransfers = document.getElementById("maxTransfers").value;
     let withBikeValue = document.getElementById("withBike").value;
     let withBike = false;
     $("#apply-options").on("click", function()
