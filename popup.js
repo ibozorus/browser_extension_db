@@ -213,7 +213,7 @@ $(function () {
                         let gleis_ankunft_geplant = all_data.legs[0].plannedArrivalPlatform;
                         let gleis_ankunft_tatsächlich = all_data.legs[0].arrivalPlatform
 
-                        let störungen = all_data.legs[0].remarks[1].type
+                        // let störungen = all_data.legs[0].remarks[1].type
                         // console.log(störungen)
                         // let störungen_message = "";
 
@@ -273,7 +273,7 @@ $(function () {
                         // break;
 
                     }
-
+                    $("#ergebnisse-modal").modal("show")
                 });
             });
 
