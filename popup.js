@@ -35,6 +35,23 @@ $(function () {
     }
     $("#fahrplan-suche").hide();
     $("#wechsel-fahrplan").on("click", () => {
+
+        let favStops = JSON.parse(localStorage.getItem("favStops"));
+        favStops.forEach((el) => {
+            $('#fav-liste').append(`
+                                    <div>
+                                        <li class="list-group-item row"> 
+                                           <button class="btn fav-list-item col-12 justify-content-start" style="text-align: start;" data-eva-id="${el.id}" data-target-value="${el.name}">
+                                                <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${el.name} 
+                                            </button>
+                                        </li>
+                                    </div>`);
+        })
+        $(".fav-list-item").on("click", function() {
+            fetchDepartures($(this).attr("data-eva-id"))
+        })
+
+
         $("#verbindungs-suche").hide();
         $("#fahrplan-suche").show();
     })
@@ -108,7 +125,7 @@ $(function () {
                     // console.log(departuresList)
                     for (let i = 0; i < departuresList.length; i++) {
                         $('#fahrplan-ergebnis-liste').append(`
-                                    <li class="list-group-item stop-list-item" data-trip-id="${departuresList[i].tripId}" > 
+                                    <li class="list-group-item" data-trip-id="${departuresList[i].tripId}" > 
                                        ${departuresList[i].stop.name} nach ${departuresList[i].destination.name} 
                                   </li>`);
                     }
@@ -136,20 +153,14 @@ $(function () {
                         $('#' + listId).append(`
                                     <div>
                                         <li class="list-group-item row"> 
-                                           <button class="btn stop-list-item col-9 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value="${stopPlaces[i].name}">
+                                           <button class="btn stop-list-item col-12 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value="${stopPlaces[i].name}">
                                                 <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
-                                            </button>
-                                            <button class="btn save-button col-2" data-target-value="${stopPlaces[i].name}" data-eva-id="${stopPlaces[i].id}">
-                                                <i class="fa-solid fa-floppy-disk"></i>
                                             </button>
                                         </li>
                                     </div>`);
                     }
                     $(".stop-list-item").on("click", function () {
                         setStopValue($(this).attr('data-target-id'), $(this).attr('data-target-value'), $(this).attr('data-eva-id'))
-                    })
-                    $(".save-button").on("click", function () {
-                        saveStop($(this).attr('data-eva-id'), $(this).attr('data-target-value'));
                     })
                 })
             })
@@ -170,14 +181,24 @@ $(function () {
                     let stopPlaces = Object.values(result);
                     for (let i = 0; i < stopPlaces.length; i++) {
                         $('#' + listId).append(`
-                                    <li class="list-group-item fahrplan-list-item" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value=" ${stopPlaces[i].name}" > 
-                                       <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
-                                  </li>`);
+                                    <div>
+                                        <li class="list-group-item row"> 
+                                           <button class="btn stop-list-item col-9 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value="${stopPlaces[i].name}">
+                                                <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
+                                            </button>
+                                            <button class="btn save-button col-2" data-target-value="${stopPlaces[i].name}" data-eva-id="${stopPlaces[i].id}">
+                                                <i class="fa-solid fa-floppy-disk"></i>
+                                            </button>
+                                        </li>
+                                    </div>`);
 
 
                     }
                     $(".fahrplan-list-item").on("click", function () {
                         fetchDepartures($(this).attr("data-eva-id"));
+                    })
+                    $(".save-button").on("click", function () {
+                        saveStop($(this).attr('data-eva-id'), $(this).attr('data-target-value'));
                     })
                 })
             })
