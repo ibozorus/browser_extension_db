@@ -4,7 +4,7 @@
   "description": "Eine Browser-Erweiterung für DB-Navigator",
   "main": "popup.js",
   "scripts": {
-    "test": "node e2e-tests/e2e-tests.js"
+    "test": "mocha e2e-tests/e2e-tests.js"
   },
   "author": "ibozorus",
   "license": "ISC",
