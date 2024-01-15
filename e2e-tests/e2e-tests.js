@@ -2,7 +2,6 @@
 require("chromedriver");
 const assert = require("assert");
 
-// import this class from selenium
 const {Builder, By} = require("selenium-webdriver");
 
 describe('First script', function () {
@@ -10,10 +9,10 @@ describe('First script', function () {
 
     before(async function () {
         driver = await new Builder().forBrowser('chrome').build();
+        await driver.get('file:///C:/Users/iekorkmaz/WebstormProjects/browser_extension_db/popup.html');
     });
 
     it('Verbindunssuche Elemente Displayed Test', async function () {
-        await driver.get('file:///C:/Users/iekorkmaz/WebstormProjects/browser_extension_db/popup.html');
         let homePage = await driver.findElement(By.css('#homepage'));
         assert.equal(true, await homePage.isDisplayed());
     });
