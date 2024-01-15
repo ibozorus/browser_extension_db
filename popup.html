@@ -151,6 +151,34 @@
                             <span id="hin-datum" class="col-6"></span>
                         </button>
                     </div>
+                    <!--                    <div class="row mt-2 col-12">-->
+                    <!--                        <button type="button" class="btn d-flex justify-content-start" data-bs-toggle="modal"-->
+                    <!--                                data-bs-target="#rueckfahrt-modal">-->
+                    <!--                            <i class="fa-solid fa-calendar-days"></i>Rückfahrt ändern-->
+                    <!--                        </button>-->
+                    <!--                    </div>-->
+                    <div class="row mt-2  col-12">
+                        <button type="button" class="btn d-flex justify-content-start" data-mdb-toggle="modal"
+                                data-mdb-target="#exampleModal">
+                            <i class="fa-solid fa-calendar-days"></i>Zwischenhalte hinzufügen/entfernen
+                        </button>
+                    </div>
+                    <div class="row mt-2  col-12">
+                        <button type="button" class="btn d-flex justify-content-start" data-mdb-toggle="modal"
+                                data-mdb-target="#exampleModal">
+                            <i class="fa-solid fa-calendar-days"></i>Verkehrsmittel
+                        </button>
+                    </div>
+                    <div class="row mt-2 col-12">
+                        <button type="button" class="btn d-flex justify-content-start row" data-bs-toggle="modal"
+                                data-bs-target="#options-modal">
+                            <div class="col-6">
+                                <span>
+                            <i class="fa-solid fa-calendar-days"></i>
+                            Einstellungen</span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -215,6 +243,31 @@
                            type="hidden" placeholder="Datum auswählen"
                            data-id="datetime" readonly="readonly">
                     <a id="apply-hinfahrt" type="button" class="apply-button btn">Übernehmen</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="options-modal" class="modal" tabindex="-1">
+        <div class="modal-fullscreen modal-dialog">
+            <div class="modal-content container">
+                <div class="modal-header">
+                    <h5 class="modal-title">Einstellungen</h5>
+                    <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                </div>
+                    <div class="modal-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="withBike">
+                            <label class="form-check-label" for="withBike">Mit Fahrrad</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-content" placeholder="Maximale Umstiege" type="number" id="maxTransfers">
+
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <a id="apply-options" type="button" class="apply-button btn">Übernehmen</a>
                 </div>
             </div>
         </div>
