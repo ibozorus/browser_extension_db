@@ -38,9 +38,9 @@
                            class="text-input col-12"
                            data-bs-toggle="modal" data-bs-target="#fahrplan-modal"/>
                 </div>
-<!--                <div class="row">-->
-<!--                    <button id="fahrplan-suchen" class="btn suchen-button">Suchen</button>-->
-<!--                </div>-->
+                <!--                <div class="row">-->
+                <!--                    <button id="fahrplan-suchen" class="btn suchen-button">Suchen</button>-->
+                <!--                </div>-->
                 <div class="row mt-2 col-12">
                     <button type="button" class="btn d-flex justify-content-start row" data-bs-toggle="modal"
                             data-bs-target="#abfahrts-modal">
@@ -127,87 +127,56 @@
                 <div class="row">
                     <button id="suchen-button" class="suchen-button btn">Suchen</button>
                 </div>
-
-                <!-- <div class="results">
-                    <table class="results-table">
-                        <tr>
-                            <td>
-
-                            </td>
-                        </tr>
-                    </table>
-                </div> -->
-
-                <div class="row">
-
-                    <div class="row mt-2 col-12">
-                        <button type="button" class="btn d-flex justify-content-start row" data-bs-toggle="modal"
-                                data-bs-target="#hinfahrt-modal">
-                            <div class="col-6">
+                <div class="row mt-2">
+                    <button type="button" class="btn" data-bs-toggle="modal"
+                            data-bs-target="#hinfahrt-modal">
+                        <div >
                                 <span>
                             <i class="fa-solid fa-calendar-days"></i>
                             Hinfahrt ändern</span>
-                            </div>
-                            <span id="hin-datum" class="col-6"></span>
-                        </button>
-                    </div>
-                    <!--                    <div class="row mt-2 col-12">-->
-                    <!--                        <button type="button" class="btn d-flex justify-content-start" data-bs-toggle="modal"-->
-                    <!--                                data-bs-target="#rueckfahrt-modal">-->
-                    <!--                            <i class="fa-solid fa-calendar-days"></i>Rückfahrt ändern-->
-                    <!--                        </button>-->
-                    <!--                    </div>-->
-<!--                    <div class="row mt-2  col-12">-->
-<!--                        <button type="button" class="btn d-flex justify-content-start" data-mdb-toggle="modal"-->
-<!--                                data-mdb-target="#exampleModal">-->
-<!--                            <i class="fa-solid fa-calendar-days"></i>Zwischenhalte hinzufügen/entfernen-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                    <div class="row mt-2  col-12">-->
-<!--                        <button type="button" class="btn d-flex justify-content-start" data-mdb-toggle="modal"-->
-<!--                                data-mdb-target="#exampleModal">-->
-<!--                            <i class="fa-solid fa-calendar-days"></i>Verkehrsmittel-->
-<!--                        </button>-->
-<!--                    </div>-->
-                    <div class="row mt-2 col-12">
-                        <button type="button" class="btn d-flex justify-content-start row" data-bs-toggle="modal"
-                                data-bs-target="#options-modal">
-                            <div class="col-6">
+                            <span id="hin-datum" ></span>
+                        </div>
+
+                    </button>
+                </div>
+                <div class="row mt-2">
+                    <button type="button" class="btn" data-bs-toggle="modal"
+                            data-bs-target="#options-modal">
+                        <div class="col-12">
                                 <span>
                             <i class="fa-solid fa-calendar-days"></i>
                             Einstellungen</span>
-                            </div>
-                        </button>
-                    </div>
+                        </div>
+                    </button>
                 </div>
             </div>
         </form>
     </div>
 
-<div id="von-modal" class="modal" tabindex="-1">
-    <div class="modal-fullscreen modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Startpunkt wählen</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <input placeholder="Von" type="text" id="von-input-modal"
-                       class="text-input-modal col-12"/>
-                <ul id="von-liste" class="list-group">
-                </ul>
+    <div id="von-modal" class="modal" tabindex="-1">
+        <div class="modal-fullscreen modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Startpunkt wählen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input placeholder="Von" type="text" id="von-input-modal"
+                           class="text-input-modal col-12"/>
+                    <ul id="von-liste" class="list-group">
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div id="ergebnisse-modal" class="modal" tabindex="-1">
-    <div class="modal-fullscreen modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Ergebnisse</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+    <div id="ergebnisse-modal" class="modal" tabindex="-1">
+        <div class="modal-fullscreen modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ergebnisse</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div id="result-items"></div>
             </div>
         </div>
@@ -226,68 +195,68 @@
                        class="text-input-modal col-12"/>
                 <ul id="nach-liste" class="list-group">
 
-                    </ul>
-                </div>
+                </ul>
             </div>
         </div>
     </div>
-    <div id="hinfahrt-modal" class="modal" tabindex="-1">
-        <div class="modal-fullscreen modal-dialog">
-            <div class="modal-content container">
-                <div class="modal-header">
-                    <h5 class="modal-title">Hinfahrt hinzufügen</h5>
-                    <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-                </div>
-                <div class="modal-body row">
-                    <input id="hinfahrt-kalender" class="kalender flatpickr flatpickr-input active col-12"
-                           type="hidden" placeholder="Datum auswählen"
-                           data-id="datetime" readonly="readonly">
-                    <a id="apply-hinfahrt" type="button" class="apply-button btn">Übernehmen</a>
-                </div>
+</div>
+<div id="hinfahrt-modal" class="modal" tabindex="-1">
+    <div class="modal-fullscreen modal-dialog">
+        <div class="modal-content container">
+            <div class="modal-header">
+                <h5 class="modal-title">Hinfahrt hinzufügen</h5>
+                <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+            </div>
+            <div class="modal-body row">
+                <input id="hinfahrt-kalender" class="kalender flatpickr flatpickr-input active col-12"
+                       type="hidden" placeholder="Datum auswählen"
+                       data-id="datetime" readonly="readonly">
+                <a id="apply-hinfahrt" type="button" class="apply-button btn">Übernehmen</a>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="options-modal" class="modal" tabindex="-1">
-        <div class="modal-fullscreen modal-dialog">
-            <div class="modal-content container">
-                <div class="modal-header">
-                    <h5 class="modal-title">Einstellungen</h5>
-                    <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<div id="options-modal" class="modal" tabindex="-1">
+    <div class="modal-fullscreen modal-dialog">
+        <div class="modal-content container">
+            <div class="modal-header">
+                <h5 class="modal-title">Einstellungen</h5>
+                <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+            </div>
+            <div class="modal-body">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="withBike">
+                    <label class="form-check-label" for="withBike">Mit Fahrrad</label>
                 </div>
-                    <div class="modal-body">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="withBike">
-                            <label class="form-check-label" for="withBike">Mit Fahrrad</label>
-                        </div>
 
-                        <div class="form-group">
-                            <input class="form-content" placeholder="Maximale Umstiege" type="number" id="maxTransfers">
+                <div class="form-group">
+                    <input class="form-content" placeholder="Maximale Umstiege" type="number" id="maxTransfers">
 
-                        </div>
-                    </div>
-                <div class="modal-footer">
-                    <a id="apply-options" type="button" class="apply-button btn">Übernehmen</a>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <a id="apply-options" type="button" class="apply-button btn">Übernehmen</a>
             </div>
         </div>
     </div>
-    <!--    <div id="rueckfahrt-modal" class="modal" tabindex="-1">-->
-    <!--        <div class="modal-fullscreen modal-dialog">-->
-    <!--            <div class="modal-content container">-->
-    <!--                <div class="modal-header">-->
-    <!--                    <h5 class="modal-title">Rückfahrt hinzufügen</h5>-->
-    <!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-    <!--                </div>-->
-    <!--                <div class="modal-body row">-->
-    <!--                    <input id="rueckfahrt-kalender" class="kalender flatpickr flatpickr-input active col-12"-->
-    <!--                           type="hidden" placeholder="Datum auswählen"-->
-    <!--                           data-id="datetime" readonly="readonly">-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
+</div>
+<!--    <div id="rueckfahrt-modal" class="modal" tabindex="-1">-->
+<!--        <div class="modal-fullscreen modal-dialog">-->
+<!--            <div class="modal-content container">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title">Rückfahrt hinzufügen</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="modal-body row">-->
+<!--                    <input id="rueckfahrt-kalender" class="kalender flatpickr flatpickr-input active col-12"-->
+<!--                           type="hidden" placeholder="Datum auswählen"-->
+<!--                           data-id="datetime" readonly="readonly">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-    <!--    </div>-->
+<!--    </div>-->
 </div>
 </div>
 
