@@ -310,6 +310,12 @@ $(function () {
         let temp_eva = localStorage.getItem("start_local_eva");
         localStorage.setItem("start_local_eva", localStorage.getItem("stop_local_eva"));
         localStorage.setItem("stop_local_eva", temp_eva);
+        
+
+        let temp_string = localStorage.getItem("start_local_string");
+        localStorage.setItem("start_local_string", localStorage.getItem("stop_local_string"));
+        localStorage.setItem("stop_local_string", temp_string);
+        
         e.preventDefault();
     });
 
