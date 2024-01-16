@@ -214,9 +214,7 @@ $(function () {
 
                         $(``)
 
-                        $('#fahrplan-ergebnis-liste').append(`
-                                    <li class="list-group-item" data-trip-id="${departuresList[i].tripId}" > 
-                                       ${departuresList[i].stop.name} nach ${departuresList[i].destination.name} 
+                        $('#fahrplan-ergebnis-liste').append(` 
                                     <li class="list-group-item stop-list-item" data-trip-id="${departuresList[i].tripId}" > 
                                        ${departuresList[i].stop.name} nach ${departuresList[i].destination.name}<br>
 
@@ -250,8 +248,8 @@ $(function () {
                         $('#' + listId).append(`
                                     <div>
                                         <li class="list-group-item row"> 
-                                           <button class="btn stop-list-item col-12 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value="${stopPlaces[i].name}">
-                                                <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
+                                           <button class="btn stop-list-item col-12 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}">
+                                                <-- <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name}  
                                             </button>
                                         </li>
                                     </div>`);
@@ -315,7 +313,7 @@ $(function () {
         let temp_string = localStorage.getItem("start_local_string");
         localStorage.setItem("start_local_string", localStorage.getItem("stop_local_string"));
         localStorage.setItem("stop_local_string", temp_string);
-        
+
         e.preventDefault();
     });
 
@@ -349,7 +347,7 @@ $(function () {
 
             // $("#von-input").val(localStorage.getItem("start_local"));
             // $("#nach-input").val(localStorage.getItem("stop_local"));
-
+            
 
             document.body.style.height = document.getElementById("main-body").clientHeight + 100 + '%';
             document.body.style.backgroundColor = "white";
@@ -380,7 +378,7 @@ $(function () {
                     // console.log(data);
                     let numDivs = data.journeys.length;
 
-                    // console.log(data.journeys)
+                    console.log(data.journeys)
 
                     let counter = -1;
                     // console.log(data.journeys[0].legs.destination)
