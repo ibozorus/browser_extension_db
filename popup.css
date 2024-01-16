@@ -211,6 +211,9 @@ body.darktheme{
     }
     ul {
         background-color: #5c5c5c;
+        li {
+            background-color: #5c5c5c;
+        }
     }
     button {
         color: white;
