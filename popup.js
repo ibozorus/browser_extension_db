@@ -124,6 +124,7 @@ $(function () {
                                     </div>`);
         })
         $(".fav-list-item").on("click", function() {
+            event.preventDefault()
             fetchDepartures($(this).attr("data-eva-id"))
         })
 
