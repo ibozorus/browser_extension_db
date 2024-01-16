@@ -89,21 +89,25 @@ describe('First script', function () {
         let dropDownMenu = await driver.findElement(By.css('#dropdownMenuButton1'));
         let wechselFahrplan = await driver.findElement(By.css('#wechsel-fahrplan'));
         let haltestelleInput = await driver.findElement(By.css("#haltestelle-input"));
-        let vonInput = await driver.findElement(By.css("#von-input"));
+        let haltestelleInputModal = await driver.findElement(By.css("#haltestelle-input-modal"));
         dropDownMenu.click();
         wechselFahrplan.click();
         await driver.sleep(1000)
         haltestelleInput.click();
         await driver.sleep(1000)
-        vonInput.click();
-        vonInput.sendKeys("W");
-        vonInput.sendKeys("e");
-        vonInput.sendKeys("i");
-        vonInput.sendKeys("m");
-        vonInput.sendKeys("a");
-        vonInput.sendKeys("r");
-        await driver.sleep(1000);
-        //await driver.findElement(await By.css("#von-liste > li:first-child")).click();
+        haltestelleInputModal.click();
+        await driver.sleep(1000)
+        haltestelleInputModal.sendKeys("W");
+        haltestelleInputModal.sendKeys("e");
+        haltestelleInputModal.sendKeys("i");
+        haltestelleInputModal.sendKeys("m");
+        haltestelleInputModal.sendKeys("a");
+        haltestelleInputModal.sendKeys("r");
+        await driver.sleep(2000);
+        await driver.findElement(await By.css("#fahrplan-liste > div:first-child > li >button")).click();
+        await driver.sleep(4000);
+        assert.equal(true, await driver.findElement(By.css("#fahrplan-ergebnis-liste")).isDisplayed());
+
     });
 
     after(async () => await driver.quit());
