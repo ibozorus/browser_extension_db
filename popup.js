@@ -248,7 +248,7 @@ $(function () {
                         $('#' + listId).append(`
                                     <div>
                                         <li class="list-group-item row"> 
-                                           <button class="btn stop-list-item col-9 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value="${stopPlaces[i].name}">
+                                           <button class="btn fahrplan-list-item col-9 justify-content-start" style="text-align: start;" data-eva-id="${stopPlaces[i].id}" data-target-id="#${inputId}" data-target-value="${stopPlaces[i].name}">
                                                 <i class="fa-solid fa-hotel" style="color: #afb4bb;">  </i>${stopPlaces[i].name} 
                                             </button>
                                             <button class="btn save-button col-2" data-target-value="${stopPlaces[i].name}" data-eva-id="${stopPlaces[i].id}">
