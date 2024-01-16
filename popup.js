@@ -74,6 +74,11 @@ function format_time(time) {
 
 
 $(function () {
+
+    $("#von-input").val(localStorage.getItem("start_local_string"));
+    $("#nach-input").val(localStorage.getItem("stop_local_string"));
+
+
     var localTheme = window.localStorage.getItem('data-theme');
 
     if (!localTheme) {
@@ -306,20 +311,34 @@ $(function () {
 
     $("#suchen-button").on("click", function (e) {
         e.preventDefault();
+
+
         let start = $("#von-input").attr("data-eva-id");
         let dst = $("#nach-input").attr("data-eva-id");
 
         if(start !== undefined && dst !== undefined){
-            localStorage.setItem("start_local", start);
-            localStorage.setItem("stop_local", dst);
+            localStorage.setItem("start_local_string", $("#von-input").val());
+            localStorage.setItem("stop_local_string", $("#nach-input").val());
+
+            localStorage.setItem("start_local_eva", start);
+            localStorage.setItem("stop_local_eva", dst);
         }
 
+
+
+        if(localStorage.getItem("start_local_eva") !== null && localStorage.getItem("stop_local_eva") !== null) {
+            start = localStorage.getItem("start_local_eva");
+            dst = localStorage.getItem("stop_local_eva");
+        }
 
 
         $(`#result-itmes`).empty();
 
         if(start !== undefined && dst !== undefined) {
             var container = document.getElementById("result-items")
+
+            // $("#von-input").val(localStorage.getItem("start_local"));
+            // $("#nach-input").val(localStorage.getItem("stop_local"));
 
 
             document.body.style.height = document.getElementById("main-body").clientHeight + 100 + '%';
@@ -351,8 +370,7 @@ $(function () {
                     // console.log(data);
                     let numDivs = data.journeys.length;
 
-                    // console.log(data.journeys);
-
+                    // console.log(data.journeys)
 
                     let counter = -1;
                     // console.log(data.journeys[0].legs.destination)
