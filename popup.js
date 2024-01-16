@@ -120,7 +120,7 @@ $(function () {
         
     }
 
-    let maximumTransfers = document.getElementById("maxTransfers").value;
+    // let maximumTransfers = document.getElementById("maxTransfers").value;
     let withBikeValue = document.getElementById("withBike").value;
     let withBike = false;
     $("#apply-options").on("click", function () {
@@ -282,12 +282,19 @@ $(function () {
         let start = $("#von-input").attr("data-eva-id");
         let dst = $("#nach-input").attr("data-eva-id");
         
+        if(start !== undefined && dst !== undefined){
+            localStorage.setItem("start_local", start);
+            localStorage.setItem("stop_local", dst);
+        }
+ 
         
+
         $(`#result-itmes`).empty();
         
         if(start !== undefined && dst !== undefined) {
             var container = document.getElementById("result-items")
             
+
             document.body.style.height = document.getElementById("main-body").clientHeight + 100 + '%';
             document.body.style.backgroundColor = "white";
 
