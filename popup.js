@@ -317,7 +317,7 @@ $(function () {
                     // console.log(data);
                     let numDivs = data.journeys.length;
 
-                    console.log(data.journeys);
+                    // console.log(data.journeys);
 
 
                     let counter = -1;

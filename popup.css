@@ -103,6 +103,11 @@ body {
     /* right:50%;   */
     
 }
+
+#checkbox-fahrrard{
+    justify-content: center;
+    display: contents;
+}
 #row-item-clickable{
     background-color:rgba(217, 217, 217) ;
     margin-bottom: 1%;
