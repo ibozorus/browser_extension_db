@@ -74,6 +74,33 @@ function format_time(time) {
 
 
 $(function () {
+    var localTheme = window.localStorage.getItem('data-theme');
+
+    if (!localTheme) {
+        console.log('voreisntellungen');
+        window.localStorage.setItem('data-theme', 'light');
+    }
+
+    if (localTheme === 'dark') {
+        console.log('todarkmode');
+        window.localStorage.removeItem('data-theme');
+        changeToDarkMode();
+    } else {
+        window.localStorage.removeItem('data-theme');
+        changeToLightMode()
+    }
+
+    $("#theme-switch-button").on("click", function () {
+        console.log('click');
+        var currentLocalTheme = window.localStorage.getItem('data-theme');
+
+        if (currentLocalTheme === 'light') {
+            changeToDarkMode();
+        } else {
+            changeToLightMode()
+        }
+    });
+
     if (localStorage.getItem("favStops") == null || localStorage.getItem("favStops") === "") {
         localStorage.setItem("favStops", "[]")
     }
@@ -117,7 +144,7 @@ $(function () {
         } else {
             return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
         }
-        
+
     }
 
     // let maximumTransfers = document.getElementById("maxTransfers").value;
@@ -281,19 +308,19 @@ $(function () {
         e.preventDefault();
         let start = $("#von-input").attr("data-eva-id");
         let dst = $("#nach-input").attr("data-eva-id");
-        
+
         if(start !== undefined && dst !== undefined){
             localStorage.setItem("start_local", start);
             localStorage.setItem("stop_local", dst);
         }
- 
-        
+
+
 
         $(`#result-itmes`).empty();
-        
+
         if(start !== undefined && dst !== undefined) {
             var container = document.getElementById("result-items")
-            
+
 
             document.body.style.height = document.getElementById("main-body").clientHeight + 100 + '%';
             document.body.style.backgroundColor = "white";
@@ -314,11 +341,11 @@ $(function () {
             // console.log(currentUnixTimestamp);
             // console.log($(`#hinfahrt-kalender`).val());
             $(`#result-items`).empty();
-            
+
             fetch(`https://v6.db.transport.rest/journeys?from=${start}&departure=${currentUnixTimestamp}&to=${dst}&results=10&language=de&transfers=2&bike=${bike}`).then((response) => {
                 // console.log(response);
-                
-                
+
+
 
                 response.json().then((data) => {
                     // console.log(data);
@@ -350,15 +377,15 @@ $(function () {
                         let planned_departure_formatted = format_time(planned_departure);
 
 
-                        
+
                         // let result_times = parsed_end_time - parsed_start_time;
 
                         let nach = all_data.legs[0].direction;
                         let gleis_von = all_data.legs[0].departurePlatform;
                         let gleis_ankunft_geplant = all_data.legs[0].plannedArrivalPlatform;
                         let gleis_ankunft_tatsächlich = all_data.legs[0].arrivalPlatform;
-                        
-                        
+
+
 
                         if(data.journeys[i].legs.length == 2){
                             let all_data = data.journeys[counter]
@@ -499,7 +526,6 @@ $(function () {
             // `);
         }
 
-
         // var cell1 = table.insertRow(0);
         // cell1.innerHTML = "Test";
         // } else {
@@ -508,3 +534,19 @@ $(function () {
 
     })
 });
+
+function changeToDarkMode() {
+    var currentBody = document.querySelector('body');
+
+    currentBody.classList.add('darktheme');
+
+    window.localStorage.setItem('data-theme', 'dark');
+}
+
+function changeToLightMode() {
+    var currentBody = document.querySelector('body');
+
+    currentBody.classList.remove('darktheme');
+
+    window.localStorage.setItem('data-theme', 'light');
+}

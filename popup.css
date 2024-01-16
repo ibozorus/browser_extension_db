@@ -160,6 +160,66 @@ body {
     font-size: larger;
 }
 
+#theme-switch {
+    margin-left: auto;
+}
+
+body.darktheme{
+    background-color: #404040;
+    #von-input {
+        color: white;
+    }
+    #nach-input {
+        color: white;
+    }
+    .flatpickr-calendar {
+        background-color: #5c5c5c;
+        .flatpickr-monthDropdown-months {
+            color: white;
+        }
+        .numInput {
+            color: white;
+        }
+        .flatpickr-day{
+            color: white;
+            /*.selected {*/
+            /*    background-color: #888888;*/
+            /*    border-color: #888888;*/
+            /*}*/
+        }
+        .flatpickr-day.selected {
+            background-color: #888888;
+            border-color: #888888;
+        }
+
+        .flatpickr-time input:hover {
+            background-color: #888888;
+        }
+        .flatpickr-weekday {
+            color: white;
+        }
+    }
+    a {
+        color: white;
+    }
+    .modal-content {
+        background-color: #404040;
+        .list-group-item {
+            background-color: #5c5c5c;
+            color: white;
+        }
+    }
+    ul {
+        background-color: #5c5c5c;
+    }
+    button {
+        color: white;
+    }
+    input {
+        background-color: #5c5c5c;
+    }
+}
+
 .elements-listed{
     margin-top: 2%;
 }
@@ -202,9 +262,9 @@ body {
     position: relative;
     right: 2%;
     border-radius: 5px;
-    margin-top: -3%;  
+    margin-top: -3%;
     display: flex;
-    
+
 }
 
 #re_01 {
