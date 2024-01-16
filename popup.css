@@ -65,6 +65,8 @@ body {
     background-color: rgb(236, 0, 22);
 }
 
+
+
 .modal-title {
     color: white;
 }
@@ -100,6 +102,11 @@ body {
     margin-top: -3%;
     /* right:50%;   */
     
+}
+
+#checkbox-fahrrard{
+    justify-content: center;
+    display: contents;
 }
 #row-item-clickable{
     background-color:rgba(217, 217, 217) ;
@@ -212,4 +219,12 @@ body {
     background-color: black;
     width: 225px;
     border-radius: 5px;
+}
+
+#placeholder_01 {
+    width: 10px;
+    background-color: green;
+    /* background-color: rgb(236, 0, 22); */
+    height: 10px;
+    padding-left: -100px;
 }

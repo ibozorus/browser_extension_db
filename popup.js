@@ -120,7 +120,7 @@ $(function () {
         
     }
 
-    let maximumTransfers = document.getElementById("maxTransfers").value;
+    // let maximumTransfers = document.getElementById("maxTransfers").value;
     let withBikeValue = document.getElementById("withBike").value;
     let withBike = false;
     $("#apply-options").on("click", function () {
@@ -282,12 +282,19 @@ $(function () {
         let start = $("#von-input").attr("data-eva-id");
         let dst = $("#nach-input").attr("data-eva-id");
         
+        if(start !== undefined && dst !== undefined){
+            localStorage.setItem("start_local", start);
+            localStorage.setItem("stop_local", dst);
+        }
+ 
         
+
         $(`#result-itmes`).empty();
         
         if(start !== undefined && dst !== undefined) {
             var container = document.getElementById("result-items")
             
+
             document.body.style.height = document.getElementById("main-body").clientHeight + 100 + '%';
             document.body.style.backgroundColor = "white";
 
@@ -303,18 +310,21 @@ $(function () {
             Ergebnisse vom ${convertUnixTimestamp(currentUnixTimestamp)}
             `);
 
-
+            let bike = $("#withBike").prop("checked");
             // console.log(currentUnixTimestamp);
             // console.log($(`#hinfahrt-kalender`).val());
             $(`#result-items`).empty();
-            fetch(`https://v6.db.transport.rest/journeys?from=${start}&departure=${currentUnixTimestamp}&to=${dst}&results=10&language=de&transfers=2`).then((response) => {
+            
+            fetch(`https://v6.db.transport.rest/journeys?from=${start}&departure=${currentUnixTimestamp}&to=${dst}&results=10&language=de&transfers=2&bike=${bike}`).then((response) => {
                 // console.log(response);
+                
+                
 
                 response.json().then((data) => {
                     // console.log(data);
                     let numDivs = data.journeys.length;
 
-                    console.log(data.journeys);
+                    // console.log(data.journeys);
 
 
                     let counter = -1;
