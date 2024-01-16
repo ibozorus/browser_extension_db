@@ -173,8 +173,39 @@ body {
 #re_nr_collapsed{
     background-color: rgba(153, 153, 153);
     border-radius: 5px;
-    width: 50px;
+    width: 100px;
     color: white;
     display:inline-block;
     text-align: center;
+}
+
+#error-msg {
+    color: red;
+}
+
+#re-number-div-01 {
+    /* background-color: rgba(153, 153, 153); */
+    color: white;
+    width: 450px;
+    text-align: center;
+    position: relative;
+    right: 2%;
+    border-radius: 5px;
+    margin-top: -3%;  
+    display: flex;
+    
+}
+
+#re_01 {
+    background-color: rgba(153, 153, 153);
+    width: 225px;
+    display: table;
+    border-radius: 5px;
+}
+
+#re_02 {
+    display: table;
+    background-color: black;
+    width: 225px;
+    border-radius: 5px;
 }

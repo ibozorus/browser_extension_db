@@ -111,8 +111,13 @@ $(function () {
         locale: "de"
     });
 
-    function parseIsoToDe(d) {
-        return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+    function parseIsoToDe(d){
+        if(d.getMinutes.length >= 2) {
+            return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":0" + d.getMinutes();
+        } else {
+            return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+        }
+        
     }
 
     let maximumTransfers = document.getElementById("maxTransfers").value;
@@ -166,11 +171,27 @@ $(function () {
             .then(response => {
                 response.json().then(result => {
                     let departuresList = result.departures;
+                    // console.log(departuresList);
+
                     // console.log(departuresList)
                     for (let i = 0; i < departuresList.length; i++) {
+
+                        let planned_when = format_time(departuresList[i].plannedWhen);
+                        let actual_when = format_time(departuresList[i].when);
+                        let bahn_id = departuresList[i].line.name;
+
+                        $(``)
+
                         $('#fahrplan-ergebnis-liste').append(`
                                     <li class="list-group-item" data-trip-id="${departuresList[i].tripId}" > 
                                        ${departuresList[i].stop.name} nach ${departuresList[i].destination.name} 
+                                    <li class="list-group-item stop-list-item" data-trip-id="${departuresList[i].tripId}" > 
+                                       ${departuresList[i].stop.name} nach ${departuresList[i].destination.name}<br>
+
+                                       <span>Geplante Abfahrt: <span style="color:green">${planned_when}</span>, 
+                                       Abfahrt: <span style="color:green">${actual_when}</span>, ${bahn_id}
+                                       </span><br>
+                                       
                                   </li>`);
                     }
                 })
@@ -258,49 +279,44 @@ $(function () {
 
     $("#suchen-button").on("click", function (e) {
         e.preventDefault();
-        // let start = $("#von-input").attr("data-eva-id");
-        // let dst = $("#nach-input").attr("data-eva-id");
-        let start = "8010101";
-        let dst = "8010366";
-
-        // let dst_local = $("#nach-input").get();
-        // console.log(start, dst)
-        // .then(response => {
-        //     console.log(response)
-        // })
-
-
+        let start = $("#von-input").attr("data-eva-id");
+        let dst = $("#nach-input").attr("data-eva-id");
+        
+        
+        $(`#result-itmes`).empty();
+        
         if(start !== undefined && dst !== undefined) {
             var container = document.getElementById("result-items")
-
-
+            
             document.body.style.height = document.getElementById("main-body").clientHeight + 100 + '%';
             document.body.style.backgroundColor = "white";
 
-            var currentUnixTimestamp = "";
+            var currentUnixTimestamp = getCurrentUnixTimestamp();
 
             if($(`#hinfahrt-kalender`).val() == "") {
                 currentUnixTimestamp = getCurrentUnixTimestamp();
             } else {
-
                 currentUnixTimestamp = convertToTimestamp($(`#hinfahrt-kalender`).val()) /1000;
-
             }
             $(`#current_date`).empty();
             $(`#current_date`).append(`
             Ergebnisse vom ${convertUnixTimestamp(currentUnixTimestamp)}
             `);
 
+
             // console.log(currentUnixTimestamp);
             // console.log($(`#hinfahrt-kalender`).val());
-
-            fetch(`https://v6.db.transport.rest/journeys?from=${start}&departure=${currentUnixTimestamp}&to=${dst}&results=10&language=de`).then((response) => {
+            $(`#result-items`).empty();
+            fetch(`https://v6.db.transport.rest/journeys?from=${start}&departure=${currentUnixTimestamp}&to=${dst}&results=10&language=de&transfers=2`).then((response) => {
                 // console.log(response);
+
                 response.json().then((data) => {
                     // console.log(data);
                     let numDivs = data.journeys.length;
 
-                    console.log(data.journeys[0].legs);
+                    console.log(data.journeys);
+
+
                     let counter = -1;
                     // console.log(data.journeys[0].legs.destination)
                     for (var i = 0; i < numDivs; i++) {
@@ -323,90 +339,154 @@ $(function () {
                         let planned_arrival_formatted = format_time(planned_arrival);
                         let planned_departure_formatted = format_time(planned_departure);
 
-                        let result_time = berechneZeitDifferenz(parsed_start_time, parsed_end_time)
 
+                        
                         // let result_times = parsed_end_time - parsed_start_time;
 
                         let nach = all_data.legs[0].direction;
                         let gleis_von = all_data.legs[0].departurePlatform;
                         let gleis_ankunft_geplant = all_data.legs[0].plannedArrivalPlatform;
                         let gleis_ankunft_tatsächlich = all_data.legs[0].arrivalPlatform;
+                        
+                        
 
+                        if(data.journeys[i].legs.length == 2){
+                            let all_data = data.journeys[counter]
+                            let re_nr_2 = all_data.legs[1].line.name
 
+                            dst = all_data.legs[1].destination.name
 
-                        // let störungen = all_data.legs[0].remarks[1].type
-                        // console.log(störungen)
-                        // let störungen_message = "";
+                            arrival_time = all_data.legs[1].arrival
+                            parsed_end_time = format_time(arrival_time);
 
-                        // if(störungen === "status") {
+                            planned_arrival = all_data.legs[1].plannedArrival;
+                            planned_arrival_formatted = format_time(planned_arrival);
 
-                        //     // störungen_message = all_data.legs[0].remarks[1].name
-                        // } else {
-                        //     störungen_message = "";
-                        // }
+                            let zwischenhalt = all_data.legs[1].origin.name
+                            let zwischenhalt_start = format_time(all_data.legs[1].departure)
 
-                        $("#result-items").append(`
-                        <div class="accordion accordion-flush" id="${i}">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" id="row-item-clickable" data-bs-target="#flush-collapse-${i}" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    <div class="elements-listed">
-                                        <p id="start-stop-time-planned"><b>${planned_departure_formatted} - ${planned_arrival_formatted}</b><span id="result_time"> | ${result_time}min</span></p>
-                                        <p id="start-stop-time"><b>${parsed_start_time}</b><b id="end_time_parsed">${parsed_end_time}</b></p>
-                                        <div id="re-number-div">${re_nr}</div>
-                                        <div>
-                                            <div id="start_element" class="row">
-                                                <span class="col-10">${strt}</span>
-                                                <span class="col-2">${dst}</span> 
+                            let zwischenhalt_ankunft = format_time(all_data.legs[0].arrival)
+
+                            let result_time = berechneZeitDifferenz(parsed_start_time, parsed_end_time)
+                            $("#result-items").append(`
+                            <div class="accordion accordion-flush" id="${i}">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" id="row-item-clickable" data-bs-target="#flush-collapse-${i}" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <div class="elements-listed">
+                                            <p id="start-stop-time-planned"><b>${planned_departure_formatted} - ${planned_arrival_formatted}</b><span id="result_time"> | ${result_time}min</span></p>
+                                            <p id="start-stop-time"><b>${parsed_start_time}</b><b id="end_time_parsed">${parsed_end_time}</b></p>
+                                            <div id="re-number-div-01">
+                                            <span id="re_01">${re_nr}</span>
+                                            <span id="re_02">${re_nr_2}</span>
+                                            </div>
+                                            <div>
+                                                <div id="start_element" class="row">
+                                                    <span class="col-10">${strt}</span>
+                                                    <span class="col-2">${dst}</span> 
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                </button>
-                                
-                                </h2>
-                                <div id="flush-collapse-${i}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                <span id="re_nr_collapsed">${re_nr}</span><br>
-                                <span>nach ${nach}</span>
-                                
-                                <span id="aktuelle-meldungen"></span>
-                                </div>
+                                    </button>
+                                    
+                                    </h2>
+                                    <div id="flush-collapse-${i}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <span id="re_nr_collapsed">${re_nr}</span><br>
+                                        <span>${planned_departure_formatted} von ${strt}</span><br>
+                                        <span>${zwischenhalt_ankunft} nach ${nach}</span><br>
+                                        <br>
+                                        <span>Umstieg</span><br><br>
+                                        <span id="re_nr_collapsed" style="background-color:black">${re_nr_2}</span><br>
+                                        <span>${zwischenhalt_start} von ${zwischenhalt}</span><br>
+                                        <span>${planned_arrival_formatted} nach ${dst}</span><br>
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        `)
+                            `)
 
-                        $(`#element${i}`).append('<a class="btn" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Link with href</a>')
-                        // link_btn.className="btn btn-primary";
-                        // link_btn.append(`
-                        // <a class="btn" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        // Link with href</a>
-                        // `);
+                        } else {
+                            let result_time = berechneZeitDifferenz(parsed_start_time, parsed_end_time)
+
+                            // let störungen = all_data.legs[0].remarks[1].type
+                            // console.log(störungen)
+                            // let störungen_message = "";
+
+                            // if(störungen === "status") {
+
+                            //     // störungen_message = all_data.legs[0].remarks[1].name
+                            // } else {
+                            //     störungen_message = "";
+                            // // }
+                            // if(data.journeys[i].legs.length >= 1){
+                            //     console.log(data.journeys[i].legs);
+                            //     console.log(true)
+                            // }
+
+                            $("#result-items").append(`
+                            <div class="accordion accordion-flush" id="${i}">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" id="row-item-clickable" data-bs-target="#flush-collapse-${i}" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <div class="elements-listed">
+                                            <p id="start-stop-time-planned"><b>${planned_departure_formatted} - ${planned_arrival_formatted}</b><span id="result_time"> | ${result_time}min</span></p>
+                                            <p id="start-stop-time"><b>${parsed_start_time}</b><b id="end_time_parsed">${parsed_end_time}</b></p>
+                                            <div id="re-number-div">${re_nr}</div>
+                                            <div>
+                                                <div id="start_element" class="row">
+                                                    <span class="col-10">${strt}</span>
+                                                    <span class="col-2">${dst}</span> 
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </button>
+                                    
+                                    </h2>
+                                    <div id="flush-collapse-${i}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                    <span id="re_nr_collapsed">${re_nr}</span><br>
+                                    <span>nach ${nach}</span>
+                                    
+                                    <span id="aktuelle-meldungen"></span>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `)
+
+                            $(`#element${i}`).append('<a class="btn" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Link with href</a>')
+                            // link_btn.className="btn btn-primary";
+                            // link_btn.append(`
+                            // <a class="btn" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            // Link with href</a>
+                            // `);
 
 
-                        // newDiv.appendChild(link_btn)
+                            // newDiv.appendChild(link_btn)
 
 
-                        //
-                        // addAccordionToDiv(newDiv, counter);
-                        // newDiv.appendChild(start_element);
+                            //
+                            // addAccordionToDiv(newDiv, counter);
+                            // newDiv.appendChild(start_element);
 
-                        // break;
+                            // break;
 
+                        }
                     }
-                    $("#ergebnisse-modal").modal("show")
+                        $("#ergebnisse-modal").modal("show")
                 });
             });
 
         } else {
-            var container = document.getElementById("result-items")
-            var newError = document.createElement('strong');
-
-            newError.innerHTML = "Fehler: Sie haben keinen Start- oder Zielpunkt festgelegt!";
-            newError.style.textAlign = "center";
-            newError.style.color = "red";
-            container.appendChild(newError);
+            alert("Fehler!\n\nIhr Start- oder Endzeitpunkt ist fehlerhaft!")
+            // $(`#result-itmes`).empty();
+            // $("#ergebnisse-modal").modal("show")
+            // $(`#result-items`).append(`
+            // <strong id="error-msg">Fehler: Sie haben keinen Start- oder Zielpunkt festgelegt!</strong>
+            // `);
         }
 
 
