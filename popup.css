@@ -165,7 +165,13 @@ body {
 }
 
 body.darktheme{
-    background-color: #404040;
+    background-color: #404040 !important;
+    #row-item-clickable {
+        background-color: #5c5c5c;
+    }
+    .elements-listed {
+        background-color: #5c5c5c;
+    }
     #von-input {
         color: white;
     }
