@@ -306,6 +306,10 @@ $(function () {
         let temp = $("#von-input").val();
         $("#von-input").val($("#nach-input").val());
         $("#nach-input").val(temp);
+
+        let temp_eva = localStorage.getItem("start_local_eva");
+        localStorage.setItem("start_local_eva", localStorage.getItem("stop_local_eva"));
+        localStorage.setItem("stop_local_eva", temp_eva);
         e.preventDefault();
     });
 
