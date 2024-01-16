@@ -303,12 +303,15 @@ $(function () {
             Ergebnisse vom ${convertUnixTimestamp(currentUnixTimestamp)}
             `);
 
-
+            let bike = $("#withBike").prop("checked");
             // console.log(currentUnixTimestamp);
             // console.log($(`#hinfahrt-kalender`).val());
             $(`#result-items`).empty();
-            fetch(`https://v6.db.transport.rest/journeys?from=${start}&departure=${currentUnixTimestamp}&to=${dst}&results=10&language=de&transfers=2`).then((response) => {
+            
+            fetch(`https://v6.db.transport.rest/journeys?from=${start}&departure=${currentUnixTimestamp}&to=${dst}&results=10&language=de&transfers=2&bike=${bike}`).then((response) => {
                 // console.log(response);
+                
+                
 
                 response.json().then((data) => {
                     // console.log(data);
