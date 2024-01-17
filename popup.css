@@ -166,6 +166,9 @@ body {
 
 body.darktheme{
     background-color: #404040 !important;
+    .form-check-label {
+        color: white;
+    }
     #row-item-clickable {
         background-color: #5c5c5c;
     }
