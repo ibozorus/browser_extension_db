@@ -183,5 +183,5 @@ Um Diese Anwendung für den privaten Zweck verwenden zu können muss man folgend
 3. jetzt noch ```npm install``` eingeben und der Ordner kann in Chrome importiert werden.
 4. als nächstes ``npm run build`` eingeben
 
-Nun erscheint im Root-Ordner ein Unterordner ``dist``. Dieser muss in Chrome importiert werden. 
+Nun erscheint im Root-Ordner ein Unterordner ``dist``. Dieser muss in Chrome importiert werden.<br><br>
 Die Dokumentation zum finalen Installieren kann [hier](https://support.google.com/chrome_webstore/answer/2664769?hl=en) gefunden werden.<br><br>
