@@ -181,5 +181,7 @@ Um Diese Anwendung für den privaten Zweck verwenden zu können muss man folgend
 1. zunächst muss das [Repository](https://github.com/ibozorus/browser_extension_db/tree/main) lokal installiert werden.
 2. nun muss man in der Kommandozeile zu dem Ordner navigieren, indem sich die lokale Kopie befindet.
 3. jetzt noch ```npm install``` eingeben und der Ordner kann in Chrome importiert werden.
+4. als nächstes ``npm run build`` eingeben
 
-Um die Anwendung final im Browser (Chrome) zu sehen, ist folgende [Anleitung](https://support.google.com/chrome_webstore/answer/2664769?hl=en) gegeben.
+Nun erscheint im Root-Ordner ein Unterordner ``dist``. Dieser muss in Chrome importiert werden. 
+Die Dokumentation zum finalen Installieren kann [hier](https://support.google.com/chrome_webstore/answer/2664769?hl=en) gefunden werden.<br><br>
