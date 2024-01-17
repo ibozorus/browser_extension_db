@@ -75,13 +75,9 @@ describe('First script', function () {
         assert.equal(true, await driver.findElement(By.css("#apply-hinfahrt")).isDisplayed());
         await driver.findElement(By.css("#apply-hinfahrt")).click();
         optionsButton.click();
-        assert.equal(true, await driver.findElement(By.css("#options-modal > div > div > div.modal-body.row > div.form-check.col-6")).isDisplayed());
-        assert.equal(true, await driver.findElement(By.css("#options-modal > div > div > div.modal-body.row > div.form-group.col-6")).isDisplayed());
+        assert.equal(true, await driver.findElement(By.css("#checkbox-fahrrard")).isDisplayed());
         assert.equal(true, await driver.findElement(By.css("#apply-options")).isDisplayed());
         await driver.findElement(By.css("#withBike")).click();
-        let maxTransfers = await driver.findElement(By.css("#maxTransfers"));
-        maxTransfers.click();
-        maxTransfers.sendKeys(1);
         await driver.findElement(By.css("#apply-options")).click();
     });
     it('Fahrplan Test', async function () {
