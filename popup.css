@@ -297,3 +297,9 @@ body.darktheme{
     height: 10px;
     padding-left: -100px;
 }
+
+#Snif_logo {
+    height: 55px;
+    width: auto;
+    margin-left: -20px;
+}
