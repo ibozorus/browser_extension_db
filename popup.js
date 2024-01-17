@@ -193,10 +193,10 @@ $(function () {
      * @returns {string} Date im deutschen Format
      */
     function parseIsoToDe(d){
-        if(d.getMinutes.length >= 2) {
-            return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":0" + d.getMinutes();
-        } else {
+        if(d.getMinutes() >= 9) {
             return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+        } else {
+            return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":0" + d.getMinutes();
         }
 
     }
