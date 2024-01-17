@@ -172,7 +172,8 @@ curl 'https://v6.db.transport.rest/journeys?from=8011113&to=8010159&departure=to
   ```
 </details>
 
-Hier wurden die Stationen 8011113 (Berlin Südkreuz) zu 8010159 (Halle (Saale)Hbf), startend morgen um 14:00 Uhr, gefetcht.<br><br>
+Hier wurden die Stationen 8011113 (Berlin Südkreuz) zu 8010159 (Halle (Saale)Hbf), startend morgen um 14:00 Uhr, gefetcht.<br><br>  
+
 
 
 ### 3. Installation
@@ -182,8 +183,3 @@ Um Diese Anwendung für den privaten Zweck verwenden zu können muss man folgend
 3. jetzt noch ```npm install``` eingeben und der Ordner kann in Chrome importiert werden.
 
 Um die Anwendung final im Browser (Chrome) zu sehen, ist folgende [Anleitung](https://support.google.com/chrome_webstore/answer/2664769?hl=en) gegeben.
-   
-
-
-
-### 4. Anwendung
