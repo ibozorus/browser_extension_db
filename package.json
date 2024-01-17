@@ -4,7 +4,8 @@
   "description": "Eine Browser-Erweiterung für DB-Navigator",
   "main": "popup.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "grunt copy"
   },
   "author": "ibozorus",
   "license": "ISC",
@@ -17,5 +18,9 @@
     "flatpickr": "^4.6.13",
     "jquery": "^3.7.1",
     "jquery-ui-dist": "^1.13.2"
+  },
+  "devDependencies": {
+    "grunt": "^1.6.1",
+    "grunt-contrib-copy": "^1.0.0"
   }
 }
