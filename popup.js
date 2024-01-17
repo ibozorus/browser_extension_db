@@ -1,3 +1,8 @@
+/**
+ * Gibt die aktuelle Unix-Timestamp zurück
+ * @returns {number} aktuelle Unix-Timestamp
+ */
+
 function getCurrentUnixTimestamp() {
     const now = new Date();
     const unixTimestamp = Math.floor(now.getTime() / 1000); // Konvertiere Millisekunden in Sekunden
@@ -5,6 +10,11 @@ function getCurrentUnixTimestamp() {
     return unixTimestamp;
 }
 
+/**
+ * Speichert die Haltestelle im localStorage
+ * @param id evaId der Haltestelle
+ * @param name name der Haltestelle
+ */
 function saveStop(id, name) {
     let favStops = JSON.parse(localStorage.getItem("favStops"));
     let isSaved = false;
@@ -18,6 +28,12 @@ function saveStop(id, name) {
     favStops.push(jsonObject);
     localStorage.setItem("favStops", JSON.stringify(favStops));
 }
+
+/**
+ * Wandelt ein Time Format in Unix Timestamp um
+ * @param timeFormat time format to convert
+ * @returns {number} unix timestamp
+ */
 function convertToTimestamp(timeFormat) {
     // Erstelle ein Date-Objekt aus dem übergebenen Zeitformat
     var date = new Date(timeFormat);
@@ -26,7 +42,12 @@ function convertToTimestamp(timeFormat) {
     return date.getTime();
 }
 
-
+/**
+ * Berechnet die Differenz zw. zwei Uhrzeiten
+ * @param zeit1 erste Uhrzeit
+ * @param zeit2 zweite Uhrzeit
+ * @returns {number} Differenz der zwei Uhrzeiten
+ */
 function berechneZeitDifferenz(zeit1, zeit2) {
     // Zerlege die Zeitangaben in Stunden und Minuten
     var teile1 = zeit1.split(':');
@@ -42,7 +63,11 @@ function berechneZeitDifferenz(zeit1, zeit2) {
     return differenzInMinuten;
 }
 
-
+/**
+ * Wandelt eine Unix-Timestamp in DE-Format um
+ * @param timestamp Unix Timestamp to convert
+ * @returns {string} DE-Format
+ */
 function convertUnixTimestamp(timestamp) {
     // Konvertiere den UNIX-Timestamp in Millisekunden
     var date = new Date(timestamp * 1000);
@@ -63,6 +88,11 @@ function convertUnixTimestamp(timestamp) {
     return formattedDate;
 }
 
+/**
+ * Formatiert unix time stamp in das Format HH:MM
+ * @param time Unix Time Stamp
+ * @returns {string} das formatierte String
+ */
 function format_time(time) {
     var parsedDate = new Date(time);
     var hours = parsedDate.getHours();
@@ -72,7 +102,9 @@ function format_time(time) {
     return parsed_result;
 }
 
-
+/**
+ * Wird ausgeführt, wenn die Seite geladen ist.
+ */
 $(function () {
 
     $("#von-input").val(localStorage.getItem("start_local_string"));
@@ -94,7 +126,9 @@ $(function () {
         window.localStorage.removeItem('data-theme');
         changeToLightMode()
     }
-
+    /**
+     * Event zum Umschalten des Themas
+     */
     $("#theme-switch-button").on("click", function () {
         console.log('click');
         var currentLocalTheme = window.localStorage.getItem('data-theme');
@@ -110,6 +144,9 @@ $(function () {
         localStorage.setItem("favStops", "[]")
     }
     $("#fahrplan-suche").hide();
+    /**
+     * Event zum Wechseln auf den Fahrplan
+     */
     $("#wechsel-fahrplan").on("click", () => {
         $('#fav-liste').empty();
         let favStops = JSON.parse(localStorage.getItem("favStops"));
@@ -132,11 +169,17 @@ $(function () {
         $("#verbindungs-suche").hide();
         $("#fahrplan-suche").show();
     })
+    /**
+     * Event zum Wechseln auf die Homepage
+     */
     $("#homepage").on("click", () => {
         $("#verbindungs-suche").show();
         $("#fahrplan-suche").hide();
     })
 
+    /**
+     * Initialisierung der Kalender
+     */
     $(".kalender").flatpickr({
         enableTime: true,
         inline: true,
@@ -144,6 +187,11 @@ $(function () {
         locale: "de"
     });
 
+    /**
+     * Wandelt ISO-Date in das deutsche Format
+     * @param d ISO-Date
+     * @returns {string} Date im deutschen Format
+     */
     function parseIsoToDe(d){
         if(d.getMinutes.length >= 2) {
             return d.getDate() + "." + (d.getMonth() + 1) + "." + d.getFullYear() + " " + d.getHours() + ":0" + d.getMinutes();
@@ -156,6 +204,9 @@ $(function () {
     // let maximumTransfers = document.getElementById("maxTransfers").value;
     let withBikeValue = document.getElementById("withBike").value;
     let withBike = false;
+    /**
+     * Übernehmen der Optionen
+     */
     $("#apply-options").on("click", function () {
         $('.modal').modal('hide');
         if (withBikeValue === "on") {
@@ -184,12 +235,21 @@ $(function () {
         headers: myHeaders,
         redirect: 'follow'
     };
-
+    /**
+     * Setzt den ausgewählten Wert in das Inputfeld rein
+     * @param id id vom Inputfeld
+     * @param value name von der Haltestelle
+     * @param evaId evaId von der Haltestelle
+     */
     const setStopValue = (id, value, evaId) => {
         $(id).val(value);
         $(id).attr("data-eva-id", evaId);
         $('.modal').modal('hide');
     }
+    /**
+     * Holt den Fahrplan für die evaId
+     * @param id evaId von der Haltestelle
+     */
     const fetchDepartures = (id) => {
         $('.modal').modal('hide');
         $('#fahrplan-ergebnis-liste').empty();
@@ -231,7 +291,9 @@ $(function () {
         $('#fahrplan-ergebnis-modal').modal('show');
 
     }
-
+    /**
+     * Holt die Haltestellen entsprechend der Suche
+     */
     $('.text-input-modal').on("input", function fetchStations() {
         $('#von-liste').empty();
         $('#nach-liste').empty();
@@ -264,7 +326,9 @@ $(function () {
             })
             .catch(error => console.log('error', error));
     });
-
+    /**
+     * Event zum Holen von Haltestellen für Verbindungssuche
+     */
     $('#haltestelle-input-modal').on("input", function fetchStations() {
         $('#fahrplan-liste').empty();
         let station = $(this).val();
@@ -302,7 +366,9 @@ $(function () {
             })
             .catch(error => console.log('error', error));
     });
-
+    /**
+     * Event zum Tauschen der Haltestellen auf der Verbindungssuche
+     */
     $("#station-tauschen").on("click", function (e) {
         let temp = $("#von-input").val();
         $("#von-input").val($("#nach-input").val());
@@ -319,7 +385,9 @@ $(function () {
 
         e.preventDefault();
     });
-
+    /**
+     * Event zum Suchen nach Haltestelle
+     */
     $("#suchen-button").on("click", function (e) {
         e.preventDefault();
 
@@ -564,6 +632,9 @@ $(function () {
     })
 });
 
+/**
+ * Wechseln zum Dark Modus
+ */
 function changeToDarkMode() {
     var currentBody = document.querySelector('body');
 
@@ -572,6 +643,9 @@ function changeToDarkMode() {
     window.localStorage.setItem('data-theme', 'dark');
 }
 
+/**
+ * Wechseln zum Light Modus
+ */
 function changeToLightMode() {
     var currentBody = document.querySelector('body');
 
